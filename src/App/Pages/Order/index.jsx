@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Navbar from '../../Components/Navbar.jsx';
 import SideBar from '../../Components/Sidebar.jsx';
-import New from './OrderTabbarPages/New.jsx';
 import Delivered from './OrderTabbarPages/Delivered.jsx';
+import New from './OrderTabbarPages/New.jsx';
 import Process from './OrderTabbarPages/Process.jsx';
-import SideContentForNew from './SidePageForNew.jsx';
 import SideContentForDelivered from './SidePageForDelivered.jsx';
+import SideContentForNew from './SidePageForNew.jsx';
 import SideContentForProcess from './SidePageForProcess.jsx';
 const Index = () => {
   const [activeTab, setActiveTab] = useState('new');
@@ -35,7 +35,7 @@ const Index = () => {
           className='custom-scrollbar'
           style={{ height: '100vh', overflowY: 'auto' }}
         >
-          <Row className='mt-4'>
+          <Row>
             <Navbar />
           </Row>
           <Row
@@ -43,44 +43,53 @@ const Index = () => {
             style={{ backgroundColor: '#FFFFFF' }}
           >
             <Col md={4} xs={12} lg={4} className='my-2 '>
-              <button
-                className={`ms-3 border-0 shadow rounded-3 px-3 p-2  ${
-                  activeTab === 'new' ? 'buttonbg' : ''
-                }`}
-                style={{
-                  backgroundColor: activeTab === 'new' ? '#00BF63' : '#ffff',
-                  color: activeTab === 'new' ? '#ffff' : '#00BF63',
-                }}
-                onClick={() => handleTabClick('new')}
-              >
-                New
-              </button>
-              <button
-                className={`border-0 ms-3 shadow rounded-3 px-3 p-2  ${
-                  activeTab === 'inProcess' ? 'buttonbg' : ''
-                }`}
-                style={{
-                  backgroundColor:
-                    activeTab === 'inProcess' ? '#00BF63' : '#ffff',
-                  color: activeTab === 'inProcess' ? '#ffff' : '#00BF63',
-                }}
-                onClick={() => handleTabClick('inProcess')}
-              >
-                In Process
-              </button>
-              <button
-                className={`border-0 ms-3 shadow rounded-3 px-3 p-2  ${
-                  activeTab === 'delivered' ? 'buttonbg' : ''
-                }`}
-                style={{
-                  backgroundColor:
-                    activeTab === 'delivered' ? '#00BF63' : 'white',
-                  color: activeTab === 'delivered' ? 'white' : '#00BF63',
-                }}
-                onClick={() => handleTabClick('delivered')}
-              >
-                Delivered
-              </button>
+              <Row>
+                <Col lg={4} md={4} xs={6}>
+                  <button
+                    className={`border-0 w-100  shadow rounded-3 px-3 p-2  ${
+                      activeTab === 'new' ? 'buttonbg' : ''
+                    }`}
+                    style={{
+                      backgroundColor:
+                        activeTab === 'new' ? '#00BF63' : '#ffff',
+                      color: activeTab === 'new' ? '#ffff' : '#00BF63',
+                    }}
+                    onClick={() => handleTabClick('new')}
+                  >
+                    New
+                  </button>
+                </Col>
+                <Col lg={4} md={4} xs={6}>
+                  <button
+                    className={`border-0 w-100 px-2 shadow rounded-3 p-2  ${
+                      activeTab === 'inProcess' ? 'buttonbg' : ''
+                    }`}
+                    style={{
+                      backgroundColor:
+                        activeTab === 'inProcess' ? '#00BF63' : '#ffff',
+                      color: activeTab === 'inProcess' ? '#ffff' : '#00BF63',
+                    }}
+                    onClick={() => handleTabClick('inProcess')}
+                  >
+                    In Process
+                  </button>
+                </Col>
+                <Col lg={4} md={4} xs={12}>
+                  <button
+                    className={`border-0 w-100 mt-3 mt-md-0 shadow rounded-3 px-3 p-2  ${
+                      activeTab === 'delivered' ? 'buttonbg' : ''
+                    }`}
+                    style={{
+                      backgroundColor:
+                        activeTab === 'delivered' ? '#00BF63' : 'white',
+                      color: activeTab === 'delivered' ? 'white' : '#00BF63',
+                    }}
+                    onClick={() => handleTabClick('delivered')}
+                  >
+                    Delivered
+                  </button>
+                </Col>
+              </Row>
 
               <div>
                 {activeTab === 'new' && (

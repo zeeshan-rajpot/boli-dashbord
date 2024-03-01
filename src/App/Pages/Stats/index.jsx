@@ -2,7 +2,6 @@ import { Col, Container, Row } from 'react-bootstrap';
 import SideBar from '../../Components/Sidebar.jsx';
 import NavBar from '../../Components/Navbar.jsx';
 import MainPage from './mainPage.jsx';
-// import Advertisingbanner from "./Advertisingbanner";
 
 const index = () => {
   return (
@@ -17,7 +16,12 @@ const index = () => {
           >
             <SideBar activetabe='Stats' />
           </Col>
-          <Col md={10} xs={10} style={{ height: '100vh', overflowY: 'auto' }}>
+          <Col
+            md={10}
+            xs={10}
+            className='custom-scrollbar'
+            style={{ height: '100vh', overflowY: 'auto' }}
+          >
             <Row>
               <NavBar />
             </Row>

@@ -7,28 +7,38 @@
 .textColor {
   color: #00BF63;
 }
+
 .textColordull {
   color: #717171;
 }
+
 .textColordark {
   color: #222222;
 }
 
 a {
   text-decoration: none;
-  /* color: var(--btnbg); */
 }
 
 p {
   margin: 0;
 }
 
+body {
+  overflow-y: hidden;
+}
 
+.tab-list-left {
+  float: left;
+}
+
+.tab-list-right {
+  float: right;
+}
 
 .custom-scrollbar {
   overflow-y: auto;
   max-height: 50%;
-  /* Half of the height */
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -64,6 +74,7 @@ p {
   .resfontlogo {
     font-size: 30px !important;
   }
+
   .resfont {
     font-size: 10px !important;
   }

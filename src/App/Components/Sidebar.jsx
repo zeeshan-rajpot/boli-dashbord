@@ -53,6 +53,18 @@ const SideBar = props => {
             <p>Menu</p>
           </div>
         </Link>
+        <Link to='/Reservations'>
+          <div
+            className={`tab-container d-flex align-items-center justify-content-start  sidebardiv ${
+              activeTab === 'Reservations' ? 'sidebarctivetab' : ''
+            }`}
+            onClick={() => handleTabClick('Reservations')}
+          >
+            {' '}
+            <img src='/Reservations icon.svg' alt='' />
+            <p>Reservations</p>
+          </div>
+        </Link>
         <Link to='/Stats'>
           <div
             className={`tab-container d-flex align-items-center justify-content-start  sidebardiv ${

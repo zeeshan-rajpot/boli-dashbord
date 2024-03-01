@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-
+import { Link } from 'react-router-dom';
 export const Navbar = () => {
   return (
     <div className='container'>
@@ -18,9 +18,11 @@ export const Navbar = () => {
           md={6}
           className='d-flex justify-content-end align-items-center'
         >
-          <div className='me-2'>
-            <img src='/notification.svg' alt='' />
-          </div>
+          <Link to='/Notification'>
+            <div className='me-2'>
+              <img src='/notification.svg' alt='' />
+            </div>
+          </Link>
           <div className='me-4'>
             <p style={{ color: '#444444' }}>Manager</p>
           </div>
@@ -30,12 +32,12 @@ export const Navbar = () => {
               width: '50px',
               height: '50px',
               overflow: 'hidden',
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
               backgroundPosition: 'center',
               backgroundSize: 'cover',
             }}
-          ></div>
+          >
+            <img src='/user.png' alt='' />
+          </div>
         </Col>
       </Row>
     </div>

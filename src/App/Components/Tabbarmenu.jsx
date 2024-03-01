@@ -6,7 +6,6 @@ const style = {
   color: '#222222',
   borderRadius: '10px',
   textAlign: 'center',
-  
   fontSize: '14px',
   boxShadow: '0px 2px 6.8px 0px rgba(0, 0, 0, 0.1)',
   margin: '0 25px',

@@ -7,8 +7,7 @@ const data = [
     quantity: 2,
     notes: 'without syrup',
     price: 18.1,
-    imageUrl:
-      'https://images.unsplash.com/photo-1675257163553-7b47b4680636?q=80&w=1452&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    imageUrl: '/Cheese Burger.png',
   },
   {
     id: 2,
@@ -16,8 +15,7 @@ const data = [
     quantity: 2,
     notes: '',
     price: 22.8,
-    imageUrl:
-      'https://images.unsplash.com/photo-1625944230945-1b7dd3b949ab?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    imageUrl: '/Spring Salad.png',
   },
   {
     id: 3,
@@ -25,8 +23,7 @@ const data = [
     quantity: 2,
     notes: '',
     price: 22.8,
-    imageUrl:
-      'https://images.unsplash.com/photo-1626379907491-3bbea53919a7?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    imageUrl: '/White Sauce Pasta.png',
   },
   {
     id: 4,
@@ -34,8 +31,7 @@ const data = [
     quantity: 2,
     notes: '',
     price: 16.8,
-    imageUrl:
-      'https://images.unsplash.com/photo-1596560548464-f010549b84d7?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    imageUrl: '/Fried Rice.png',
   },
 ];
 

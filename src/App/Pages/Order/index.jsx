@@ -51,8 +51,8 @@ const Index = () => {
                     }`}
                     style={{
                       backgroundColor:
-                        activeTab === 'new' ? '#00BF63' : '#ffff',
-                      color: activeTab === 'new' ? '#ffff' : '#00BF63',
+                        activeTab === 'new' ? '#00BF63' : '#FFFFFF',
+                      color: activeTab === 'new' ? '#FFFFFF' : '#222222',
                     }}
                     onClick={() => handleTabClick('new')}
                   >
@@ -66,8 +66,8 @@ const Index = () => {
                     }`}
                     style={{
                       backgroundColor:
-                        activeTab === 'inProcess' ? '#00BF63' : '#ffff',
-                      color: activeTab === 'inProcess' ? '#ffff' : '#00BF63',
+                        activeTab === 'inProcess' ? '#00BF63' : '#FFFFFF',
+                      color: activeTab === 'inProcess' ? '#FFFFFF' : '#222222',
                     }}
                     onClick={() => handleTabClick('inProcess')}
                   >
@@ -81,8 +81,8 @@ const Index = () => {
                     }`}
                     style={{
                       backgroundColor:
-                        activeTab === 'delivered' ? '#00BF63' : 'white',
-                      color: activeTab === 'delivered' ? 'white' : '#00BF63',
+                        activeTab === 'delivered' ? '#00BF63' : '#FFFFFF',
+                      color: activeTab === 'delivered' ? '#FFFFFF' : '#222222',
                     }}
                     onClick={() => handleTabClick('delivered')}
                   >

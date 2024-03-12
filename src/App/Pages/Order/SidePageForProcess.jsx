@@ -4,8 +4,7 @@ const SidePageForProcess = () => {
   // Define your data array
   const data = [
     { title: 'Table Number', number: '07' },
-    { title: 'Preparation Time', number: '00h: 25m: 30s' },
-    { title: 'Matt Paul', number: '+00 123 321 456' },
+    { title: 'Matt Paul', number: 'johnsondoe@nomail.com' },
   ];
 
   const tableItems = data.map((item, index) => (
@@ -47,7 +46,7 @@ const SidePageForProcess = () => {
         </p>
       </div>
 
-      <div className='d-flex my-5 justify-content-between align-items-center'>
+      <div className='d-flex my-5 justify-content-between align-items-center w-50 '>
         {tableItems}
       </div>
 

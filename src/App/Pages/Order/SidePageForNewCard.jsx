@@ -92,26 +92,40 @@ const ItemProcessCard = () => {
         <SidePageCard key={item.id} item={item} />
       ))}
 
-      <div className='text-end my-3'>
-        <p style={{ color: '#717171' }}>
-          Total{' '}
-          <span style={{ color: '#222222', fontWeight: '500' }}>$60:00</span>
+      <div className='d-flex justify-content-between align-items-center  my-3'>
+        <p style={{ color: '#4C535F', fontSize: '14px', fontWeight: '500' }}>
+          Total Amount{' '}
         </p>
+        <span style={{ color: '#222222', fontWeight: '500', fontSize: '18px' }}>
+          $60:00
+        </span>
       </div>
 
       <div className='d-flex my-3 justify-content-between align-items-center '>
-        <button
-          className='rounded-4 bg-transparent px-3 py-1'
-          style={{ border: '1px solid #00BF63', color: '#00BF63' }}
-        >
-          Add
-        </button>
-        <button
-          className='rounded-4 border-0 px-3 py-2'
-          style={{ backgroundColor: '#00BF63', color: '#FFFF' }}
-        >
-          Accept Oder
-        </button>
+        <div className='d-flex flex-column justify-content-start align-items-start'>
+          <p style={{ color: '#4C535F', fontSize: '12px', fontWeight: '500' }}>
+            Add Preparation Time
+          </p>
+          <button
+            className='rounded-4 bg-transparent px-3 py-1 border-0 w-100 px-5 py-2 mt-2'
+            style={{
+              // border: '1px solid #00BF63',
+              backgroundColor: '#FFFFFF',
+              color: '#A6A6A6',
+              boxShadow: '1px 2px 11.100000381469727px 0px #0000001A',
+            }}
+          >
+            00h: 25m: 30s
+          </button>
+        </div>
+        <div>
+          <button
+            className='rounded-4 border-0 px-3 py-2'
+            style={{ backgroundColor: '#00BF63', color: '#FFFF' }}
+          >
+            Accept Oder
+          </button>
+        </div>
       </div>
     </div>
   );

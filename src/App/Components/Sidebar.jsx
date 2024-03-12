@@ -1,5 +1,7 @@
 // import React from 'react'
 import { useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
 import { Link } from 'react-router-dom';
 import './SideBar.css';
 
@@ -9,6 +11,10 @@ const SideBar = props => {
   const handleTabClick = tab => {
     setActiveTab(tab);
   };
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <>
@@ -65,7 +71,43 @@ const SideBar = props => {
             <p>Reservations</p>
           </div>
         </Link>
-        <Link to='/Stats'>
+        <Link to='/Registered'>
+          <div
+            className={`tab-container d-flex align-items-center justify-content-start  sidebardiv ${
+              activeTab === 'Registered' ? 'sidebarctivetab' : ''
+            }`}
+            onClick={() => handleTabClick('Registered')}
+          >
+            {' '}
+            <img src='/Profile.svg' alt='' />
+            <p>Registered users</p>
+          </div>
+        </Link>
+        <Link to='/Loyalty'>
+          <div
+            className={`tab-container d-flex align-items-center justify-content-start  sidebardiv ${
+              activeTab === 'Loyalty' ? 'sidebarctivetab' : ''
+            }`}
+            onClick={() => handleTabClick('Loyalty')}
+          >
+            {' '}
+            <img src='/voucher discount.svg' alt='' />
+            <p>Loyalty Card</p>
+          </div>
+        </Link>
+        <Link to='/History'>
+          <div
+            className={`tab-container d-flex align-items-center justify-content-start  sidebardiv ${
+              activeTab === 'History' ? 'sidebarctivetab' : ''
+            }`}
+            onClick={() => handleTabClick('History')}
+          >
+            {' '}
+            <img src='/Backup.svg' alt='' />
+            <p>History</p>
+          </div>
+        </Link>
+        {/* <Link to='/Stats'>
           <div
             className={`tab-container d-flex align-items-center justify-content-start  sidebardiv ${
               activeTab === 'Stats' ? 'sidebarctivetab' : ''
@@ -76,7 +118,7 @@ const SideBar = props => {
             <img src='/Stats.svg' alt='' />
             <p>Stats</p>
           </div>
-        </Link>
+        </Link> */}
         <Link to='/Settings'>
           <div
             className={`tab-container d-flex align-items-center justify-content-start  sidebardiv ${
@@ -89,40 +131,99 @@ const SideBar = props => {
             <p>Settings</p>
           </div>
         </Link>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        {/* <div
-          style={{
-            backgroundColor: '#2DCC70',
-            borderRadius: '100px',
-            height: '6px',
-            width: '45px',
-            transform: 'rotate(90deg)',
-          }}
-        ></div> */}
 
-        <Link to='/Logout'>
-          <div class='d-flex mt-5  justify-content-center align-items-center shadow p-3 w-50 bottom-0  mx-auto my-auto rounded-3'>
-            <img src='/logouticon.svg' alt='' />
-            <p
-              class='ms-0 dis  ms-md-2'
+        <div
+          class='d-flex mt-5  justify-content-center align-items-center shadow p-3 w-50 bottom-0  mx-auto my-auto rounded-3 '
+          role='button'
+          onClick={handleShow}
+        >
+          <img src='/logouticon.svg' alt='' />
+          <p
+            class='ms-0 dis  ms-md-2'
+            style={{
+              fontSize: '16px',
+              fontWeight: '400',
+              color: '#00BF63',
+            }}
+          >
+            Logout
+          </p>
+        </div>
+
+        <div>
+          <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop='static'
+            centered
+            keyboard={false}
+          >
+            <div
+              className='d-flex flex-column w-100 justify-content-center align-items-center '
               style={{
-                fontSize: '16px',
-                fontWeight: '400',
-                color: '#00BF63',
+                backgroundColor: '#FFFFFF',
+                borderRadius: '24px',
               }}
             >
-              Logout
-            </p>
-          </div>
-        </Link>
+              <div className='d-flex mt-5 justify-content-center align-items-center '>
+                <img src='/logout.svg' alt='' />
+                <p
+                  className='ms-3'
+                  style={{
+                    color: '#444444',
+                    fontSize: '24px',
+                    FontWeight: '500',
+                  }}
+                >
+                  Sign Out
+                </p>
+              </div>
+              <div className='my-4'>
+                <p
+                  style={{
+                    color: '#222222',
+                    fontSize: '16px',
+                    FontWeight: '400',
+                  }}
+                >
+                  Are you sure you want to Sign Out?
+                </p>
+              </div>
+            </div>
+            <Row className='px-4 mb-5 mt-3'>
+              <Col lg={6} md={6} xs={12}>
+                <button
+                  className='w-100 p-3 px-4'
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    border: '1px solid #A0A0A0',
+                    color: '#A0A0A0',
+                    fontSize: '16px',
+                    fontWeight: '500',
+                    borderRadius: '18px',
+                  }}
+                  onClick={handleClose}
+                >
+                  No
+                </button>
+              </Col>
+              <Col lg={6} md={6} xs={12}>
+                <button
+                  className='w-100 p-3 px-4 border-0'
+                  style={{
+                    backgroundColor: '#F20707',
+                    color: '#FFFFFF',
+                    fontSize: '16px',
+                    fontWeight: '500',
+                    borderRadius: '18px',
+                  }}
+                >
+                  Yes
+                </button>
+              </Col>
+            </Row>
+          </Modal>
+        </div>
       </div>
     </>
   );

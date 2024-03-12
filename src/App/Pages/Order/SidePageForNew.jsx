@@ -4,8 +4,8 @@ const SidePage = () => {
   // Define your data array
   const data = [
     { title: 'Table Number', number: '07' },
-    { title: 'Preparation Time', number: '00h: 25m: 30s' },
-    { title: 'Matt Paul', number: '+00 123 321 456' },
+    // { title: 'Preparation Time', number: '00h: 25m: 30s' },
+    { title: 'Matt Paul', number: 'johnsondoe@nomail.com' },
   ];
 
   const tableItems = data.map((item, index) => (
@@ -19,7 +19,7 @@ const SidePage = () => {
           borderRadius: '50px',
         }}
       ></div>
-      <div className='d-flex flex-column justify-content-start align-items-start'>
+      <div className=''>
         <p
           className='my-0 resfont'
           style={{ color: '#A6A6A6', fontWeight: '500' }}
@@ -47,7 +47,7 @@ const SidePage = () => {
         </p>
       </div>
 
-      <div className='d-flex my-5 justify-content-between align-items-center'>
+      <div className='d-flex  my-5 justify-content-between align-items-center w-50'>
         {tableItems}
       </div>
 

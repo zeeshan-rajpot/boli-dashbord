@@ -3,9 +3,12 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 const mainPage = () => {
   return (
-    <Container className="m-2 mb-4 shadow rounded-3">
+    <Container className='m-2 mb-4 shadow rounded-3'>
       <div className='p-4'>
-        <p className='textColor' style={{ fontSize: '22px', fontWeight: '700' }}>
+        <p
+          className='textColor'
+          style={{ fontSize: '22px', fontWeight: '700' }}
+        >
           Settings
         </p>
 
@@ -15,47 +18,142 @@ const mainPage = () => {
           </p>
         </div>
 
-        <div className='d-flex flex-column mt-2 justify-content-center align-items-center rounded-4 ' style={{ border: '1px dashed  #4C535F', backgroundColor: '#EDF2F6', width: '132px', height: '130px' }}>
+        <div
+          className='d-flex flex-column mt-2 justify-content-center align-items-center rounded-4 '
+          style={{
+            boxShadow: '1px 2px 11.100000381469727px 0px #0000001A',
+            backgroundColor: '#FFFFFF',
+            width: '132px',
+            height: '130px',
+          }}
+        >
           <img src='/gallery-add.svg' alt='' />
-          <p className='text-center pt-2' style={{ color: '#4C535F', fontSize: '15px', fontWeight: '500' }}>
+          <p
+            className='text-center pt-2'
+            style={{ color: '#4C535F', fontSize: '15px', fontWeight: '500' }}
+          >
             Upload your <br /> photo
           </p>
         </div>
-
+        <br />
         <hr style={{ border: '2px solid #E0E4EC' }} />
 
         <Row>
           <Col sm={12} md={6} className='mt-4'>
-            <p style={{ color: '#4C535F', fontSize: '16px', fontWeight: '500' }}>Full name</p>
-            <input type='text' className='rounded-3 p-2 w-100' style={{ backgroundColor: '#EDF2F6', border: '1px solid #E0E4EC', color: '#8D98AA', fontSize: '14px', fontWeight: '500' }} placeholder='Please enter your full name' />
+            <p
+              style={{ color: '#4C535F', fontSize: '16px', fontWeight: '500' }}
+            >
+              Full name
+            </p>
+            <input
+              type='text'
+              className='rounded-3 p-2  w-100 border-0 '
+              style={{
+                backgroundColor: '#FFFFFF',
+                color: '#8D98AA',
+                fontSize: '14px',
+                fontWeight: '500',
+                boxShadow: ' 1px 2px 11.100000381469727px 0px #0000001A',
+              }}
+              placeholder='Please enter your full name'
+            />
           </Col>
           <Col sm={12} md={6} className='mt-4'>
-            <p style={{ color: '#4C535F', fontSize: '16px', fontWeight: '500' }}>Email</p>
-            <input type='text' className='rounded-3 p-2 w-100' style={{ backgroundColor: '#EDF2F6', border: '1px solid #E0E4EC', color: '#8D98AA', fontSize: '14px', fontWeight: '500' }} placeholder='Please enter your email' />
+            <p
+              style={{ color: '#4C535F', fontSize: '16px', fontWeight: '500' }}
+            >
+              Email
+            </p>
+            <input
+              type='text'
+              className='rounded-3 p-2 w-100'
+              style={{
+                backgroundColor: '#FFFFFF',
+                border: 'none',
+                color: '#8D98AA',
+                fontSize: '14px',
+                fontWeight: '500',
+                boxShadow: ' 1px 2px 11.100000381469727px 0px #0000001A',
+              }}
+              placeholder='Please enter your email'
+            />
           </Col>
         </Row>
 
         <Row>
           <Col sm={12} md={6} className='mt-4'>
-            <p style={{ color: '#4C535F', fontSize: '16px', fontWeight: '500' }}>Username</p>
-            <input type='text' className='rounded-3 p-2 w-100' style={{ backgroundColor: '#EDF2F6', border: '1px solid #E0E4EC', color: '#8D98AA', fontSize: '14px', fontWeight: '500' }} placeholder='Please enter your username' />
+            <p
+              style={{ color: '#4C535F', fontSize: '16px', fontWeight: '500' }}
+            >
+              Username
+            </p>
+            <input
+              type='text'
+              className='rounded-3 p-2 w-100'
+              style={{
+                backgroundColor: '#FFFFFF',
+                border: 'none',
+                color: '#8D98AA',
+                fontSize: '14px',
+                fontWeight: '500',
+                boxShadow: ' 1px 2px 11.100000381469727px 0px #0000001A',
+              }}
+              placeholder='Please enter your username'
+            />
           </Col>
           <Col sm={12} md={6} className='mt-4'>
-            <p style={{ color: '#4C535F', fontSize: '16px', fontWeight: '500' }}>Phone number</p>
-            <input type='text' className='rounded-3 p-2 w-100' style={{ backgroundColor: '#EDF2F6', border: '1px solid #E0E4EC', color: '#8D98AA', fontSize: '14px', fontWeight: '500' }} placeholder='+1  Please enter your phone number' />
+            <p
+              style={{ color: '#4C535F', fontSize: '16px', fontWeight: '500' }}
+            >
+              Phone number
+            </p>
+            <input
+              type='tel'
+              className='rounded-3 p-2 w-100'
+              style={{
+                backgroundColor: '#FFFFFF',
+                border: 'none',
+                color: '#8D98AA',
+                fontSize: '14px',
+                fontWeight: '500',
+                boxShadow: ' 1px 2px 11.100000381469727px 0px #0000001A',
+              }}
+              placeholder='+1 | Please enter your phone number'
+            />
+          </Col>
+          <Col sm={12} md={6} className='mt-4'>
+            <p
+              style={{ color: '#4C535F', fontSize: '16px', fontWeight: '500' }}
+            >
+              Account Number
+            </p>
+            <input
+              type='tel'
+              className='rounded-3 p-2 w-100'
+              style={{
+                backgroundColor: '#FFFFFF',
+                border: 'none',
+                color: '#8D98AA',
+                fontSize: '14px',
+                fontWeight: '500',
+                boxShadow: ' 1px 2px 11.100000381469727px 0px #0000001A',
+              }}
+              placeholder='Please enter Company’s account number'
+            />
           </Col>
         </Row>
 
-        <div className='mt-5'>
-          <div className='d-flex justify-content-start align-items-center'>
-            <button className='rounded-3 p-2 border-0 text-white' style={{ backgroundColor: '#00BF63' }}>
-              Update Profile
+        <Row className='mt-5'>
+          <Col lg={9} md={9}></Col>
+          <Col lg={3} xs={12} md={3}>
+            <button
+              className='rounded-3 w-100 p-2 border-0 text-white'
+              style={{ backgroundColor: '#00BF63' }}
+            >
+              Done
             </button>
-            <p className='ms-3' style={{ fontSize: '18px', fontWeight: '500', color: '#4C535F' }}>
-              Reset
-            </p>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </div>
     </Container>
   );

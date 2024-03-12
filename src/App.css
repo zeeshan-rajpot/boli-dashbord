@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap');
 
 .buttonbg {
   background-color: #00BF63;
@@ -26,7 +26,9 @@ p {
 
 body {
   overflow-y: hidden;
+  overflow-x: hidden;
 }
+
 
 .tab-list-left {
   float: left;

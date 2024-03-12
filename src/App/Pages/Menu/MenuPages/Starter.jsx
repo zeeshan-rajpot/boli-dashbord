@@ -8,7 +8,7 @@ const Starter = () => {
       <Row className='no-gutters'>
         <Col lg={3} md={3} xl={3}>
           <StarterCard
-            Image='/Cheese Burger.png'
+            Image='/Cheese Burger .png'
             price='3.88'
             Name='Cheese Burger'
           />
@@ -25,18 +25,22 @@ const Starter = () => {
         </Col>
         <Col lg={3} md={3} xl={3}>
           <StarterCard
-            Image='/Crispy Sandwitch.png'
+            Image='/Crispy Sandwitch .png'
             price='3.88'
             Name='Crispy Sandwitch'
           />
         </Col>
         <Col lg={3} md={3} xl={3}>
-          <StarterCard Image='/Thai  Soup.png' price='3.88' Name='Thai  Soup' />
+          <StarterCard
+            Image='/White Sauce Pasta.png'
+            price='3.88'
+            Name='Thai  Soup'
+          />
         </Col>
 
         <Col lg={3} md={3} xl={3}>
           <StarterCard
-            Image='/Cheese Burger.png'
+            Image='/Cheese Burger .png'
             price='3.88'
             Name='Cheese Burger'
           />

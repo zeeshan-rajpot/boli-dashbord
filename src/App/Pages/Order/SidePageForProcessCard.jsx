@@ -95,21 +95,60 @@ const SidePageCardList = () => {
       {data.map(item => (
         <SidePageCard key={item.id} item={item} />
       ))}
+      <div className='d-flex justify-content-between align-items-center my-4'>
+        <div className='d-flex flex-column justify-content-start align-items-start '>
+          <div>
+            <p
+              style={{ color: '#717171', fontSize: '14px', fontWeight: '400' }}
+            >
+              Status:{' '}
+              <span
+                style={{
+                  color: '#00BF63',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                }}
+              >
+                Confirmed
+              </span>
+            </p>
+          </div>
+          <div className='mt-2'>
+            <p
+              style={{ color: '#717171', fontSize: '14px', fontWeight: '400' }}
+            >
+              Preparation Time{' '}
+              <span
+                style={{
+                  color: '#00BF63',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                }}
+              >
+                00h: 25m: 30s
+              </span>
+            </p>
+          </div>
+        </div>
+        <div className='d-flex flex-column justify-content-end align-items-end '>
+          <div>
+            <p style={{ color: '#717171' }}>
+              Total{' '}
+              <span style={{ color: '#222222', fontWeight: '500' }}>
+                $60:00
+              </span>
+            </p>
+          </div>
 
-      <div className='text-end my-3'>
-        <p style={{ color: '#717171' }}>
-          Total{' '}
-          <span style={{ color: '#222222', fontWeight: '500' }}>$60:00</span>
-        </p>
-      </div>
-
-      <div className='d-flex my-3 justify-content-end align-items-end '>
-        <button
-          className='rounded-5 border-0 px-3 py-2'
-          style={{ backgroundColor: '#00BF63', color: '#FFFF' }}
-        >
-          Cancel
-        </button>
+          <div className='mt-2'>
+            <button
+              className='rounded-5 border-0 px-3 py-2'
+              style={{ backgroundColor: '#00BF63', color: '#FFFF' }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

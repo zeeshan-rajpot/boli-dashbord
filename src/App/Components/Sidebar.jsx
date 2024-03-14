@@ -209,7 +209,7 @@ const SideBar = props => {
               </Col>
               <Col lg={6} md={6} xs={12}>
                 <button
-                  className='w-100 p-3 px-4 border-0'
+                  className='w-100 p-3 mt-4 mt-md-0 px-4 border-0'
                   style={{
                     backgroundColor: '#F20707',
                     color: '#FFFFFF',

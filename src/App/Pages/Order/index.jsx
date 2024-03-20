@@ -14,6 +14,11 @@ const Index = () => {
   const handleTabClick = tab => {
     setActiveTab(tab);
   };
+  const [selectedCard, setSelectedCard] = useState(1);
+
+  const handleSelectCard = cardId => {
+    setSelectedCard(cardId);
+  };
   return (
     <Container fluid className='h-100'>
       <Row>
@@ -94,7 +99,7 @@ const Index = () => {
               <div>
                 {activeTab === 'new' && (
                   <div>
-                    <New />
+                    <New onSelectCard={handleSelectCard} />
                   </div>
                 )}
                 {activeTab === 'inProcess' && (
@@ -114,7 +119,10 @@ const Index = () => {
               {/* Side content */}
               {activeTab === 'new' && (
                 <div>
-                  <SideContentForNew />
+                  <SideContentForNew
+                    tableNumber={`Table No. ${selectedCard}`}
+                    TotalAmount='06'
+                  />
                 </div>
               )}
               {activeTab === 'inProcess' && (

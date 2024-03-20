@@ -79,7 +79,7 @@ const mainPage = () => {
             />
           </Col>
         </Row>
-{/* main */}
+{/* main vvddddd*/}
         <Row>
           <Col sm={12} md={6} className='mt-4'>
             <p

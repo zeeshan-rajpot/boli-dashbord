@@ -85,7 +85,7 @@ const SidePageCard = ({ item }) => {
   );
 };
 
-const ItemProcessCard = () => {
+const ItemProcessCard = ({ totalAmount }) => {
   return (
     <div>
       {data.map(item => (
@@ -97,7 +97,7 @@ const ItemProcessCard = () => {
           Total Amount{' '}
         </p>
         <span style={{ color: '#222222', fontWeight: '500', fontSize: '18px' }}>
-          $60:00
+        {totalAmount}
         </span>
       </div>
 

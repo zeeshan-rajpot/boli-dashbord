@@ -1,10 +1,10 @@
+// SideContentForNew.jsx
 import React from 'react';
 import ItemCard from './SidePageForNewCard.jsx';
-const SidePage = () => {
-  // Define your data array
+
+const SideContentForNew = ({ tableNumber, TotalAmount }) => {
   const data = [
-    { title: 'Table Number', number: '07' },
-    // { title: 'Preparation Time', number: '00h: 25m: 30s' },
+    { title: 'Table Number', number: tableNumber }, // Use the tableNumber prop directly
     { title: 'Matt Paul', number: 'johnsondoe@nomail.com' },
   ];
 
@@ -43,7 +43,7 @@ const SidePage = () => {
           Order Details
         </p>
         <p style={{ color: '#717171', fontSize: '15px', fontWeight: '500' }}>
-          Order #010104
+          {`Order for ${tableNumber}`}
         </p>
       </div>
 
@@ -52,10 +52,10 @@ const SidePage = () => {
       </div>
 
       <div className='mt-4'>
-        <ItemCard />
+      <ItemCard TotalNewAmount={TotalAmount} />
       </div>
     </div>
   );
 };
 
-export default SidePage;
+export default SideContentForNew;

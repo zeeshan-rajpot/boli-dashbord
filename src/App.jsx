@@ -20,6 +20,9 @@ import Login from "./App/Pages/Login/Login.jsx";
 import QR from "./App/Pages/QR/index.jsx";
 import RestaurantName from "./App/Pages/Register/ResName.jsx";
 import RestaurantLocation from "./App/Pages/Register/RegLocation.jsx";
+import ForgotPassword from "./App/Pages/Login/ForgotPassword.jsx";
+import SignUp from "./App/Pages/Register/SignUp.jsx";
+import Otp from "./App/Pages/Register/OtpVerification.jsx";
 
 function App() {
   return (
@@ -42,6 +45,9 @@ function App() {
           <Route path="/QR" element={<QR />} />
           <Route path="/restaurantname" element={<RestaurantName />} />
           <Route path="/restaurantlocation" element={<RestaurantLocation />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/otp" element={<Otp />} />
         </Routes>
       </BrowserRouter>
     </>

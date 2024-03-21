@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap");
 
-body{
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -8,11 +8,11 @@ body{
 }
 
 .buttonbg {
-  background-color: #00BF63;
+  background-color: #00bf63;
 }
 
 .textColor {
-  color: #00BF63;
+  color: #00bf63;
 }
 
 .textColordull {
@@ -36,7 +36,6 @@ body {
   overflow-x: hidden;
 }
 
-
 .tab-list-left {
   float: left;
 }
@@ -55,25 +54,18 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #D9D9D9;
+  background: #d9d9d9;
   border-radius: 5px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #00BF63;
+  background: #00bf63;
   border-radius: 5px;
 }
 
-
-
 .resfont {
-
   font-size: 16px;
 }
-
-
-
-
 
 @media only screen and (max-width: 600px) {
   .mobilewidth {
@@ -91,7 +83,15 @@ body {
   .dis {
     display: none;
   }
-  .mart100{
+  .mart100 {
     margin-top: 100px !important;
+  }
+
+  .mobv-login {
+    width: 95%;
+    margin-top: 5rem !important;
+  }
+  .mobv-img {
+    margin-left: 330px !important;
   }
 }

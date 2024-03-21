@@ -18,7 +18,7 @@ const Process = () => {
           }}
         >
           <ProcessCard
-            tableNo='Table No. 07'
+            tableNo='Table No. 07878778'
             description='As soon as'
             price='$60.00'
             clicked={clickedCard === 1}

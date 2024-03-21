@@ -2,6 +2,8 @@ import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import LoginPage from './App/Pages/Authentication/Login.jsx';
 import Orders from './App/Pages/Order/index.jsx';
 import Order from './App/Pages/Order/index.jsx';
 import Menu from './App/Pages/Menu/index.jsx';
@@ -15,6 +17,8 @@ import Stats from './App/Pages/Stats/index.jsx';
 import Settings from './App/Pages/Setting/index.jsx';
 import Notification from './App/Pages/Notification/index.jsx';
 import Login from './App/Pages/Login/Login.jsx';
+import QR from './App/Pages/QR/index.jsx';
+
 function App() {
   return (
     <>
@@ -36,6 +40,7 @@ function App() {
 
 
           
+          <Route path='/QR' element={<QR />} />
         </Routes>
       </BrowserRouter>
     </>

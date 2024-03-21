@@ -71,6 +71,18 @@ const SideBar = props => {
             <p>Reservations</p>
           </div>
         </Link>
+        <Link to='/QR'>
+          <div
+            className={`tab-container d-flex align-items-center justify-content-start  sidebardiv ${
+              activeTab === 'QR' ? 'sidebarctivetab' : ''
+            }`}
+            onClick={() => handleTabClick('QR')}
+          >
+            {' '}
+            <img src='/QR.svg' alt='' />
+            <p>QR Codes</p>
+          </div>
+        </Link>
         <Link to='/Registered'>
           <div
             className={`tab-container d-flex align-items-center justify-content-start  sidebardiv ${

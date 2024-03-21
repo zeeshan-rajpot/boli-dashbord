@@ -16,6 +16,7 @@ import History from './App/Pages/History/index.jsx';
 import Stats from './App/Pages/Stats/index.jsx';
 import Settings from './App/Pages/Setting/index.jsx';
 import Notification from './App/Pages/Notification/index.jsx';
+import Login from './App/Pages/Login/Login.jsx';
 import QR from './App/Pages/QR/index.jsx';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<LoginPage />} />
+          {/* <Route path='/' element={<Orders />} /> */}
           <Route path='/Orders' element={<Orders />} />
           <Route path='/Menu' element={<Menu />} />
           <Route path='/Add' element={<Add />} />
@@ -35,6 +36,10 @@ function App() {
           <Route path='/Stats' element={<Stats />} />
           <Route path='/Settings' element={<Settings />} />
           <Route path='/Notification' element={<Notification />} />
+          <Route path='/' element={<Login />} />
+
+
+          
           <Route path='/QR' element={<QR />} />
         </Routes>
       </BrowserRouter>

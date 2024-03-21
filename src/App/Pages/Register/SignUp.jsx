@@ -2,18 +2,26 @@ import { React, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Alert } from "react-bootstrap";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const SignUp = () => {
+
+    const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const initialValues = {
+    name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   };
 
   const validate = (values) => {
     const errors = {};
+
+    if (!values.name) {
+      errors.email = "Name is required";
+    }
 
     if (!values.email) {
       errors.email = "Email is required";
@@ -25,19 +33,22 @@ const Login = () => {
       errors.password = "Password is required";
     }
 
+    if (!values.password !== !values.confirmPassword) {
+      errors.confirmPassword = "Password does not match";
+    }
+
     return errors;
   };
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const response = await axios.post(
-        "https://boli.azurewebsites.net/api/restaurant/login",
+        "https://boli.azurewebsites.net/api/restaurant/register",
         values
       );
-      const token = response.data.token; // Assuming the token is returned in the response
-      localStorage.setItem("token", token);
       console.log(response.data); // Handle the response from the server
       Alert.success("Logged in successfully"); // Display a success message
+      nav("/")
     } catch (error) {
       console.error("Error:", error); // Log any errors
       Alert.error("Login failed"); // Display an error message
@@ -70,12 +81,29 @@ const Login = () => {
               {({ isSubmitting }) => (
                 <Form>
                   <div>
-                    <h2 className="fw-bold">Log In</h2>
+                    <h2 className="fw-bold">Sign Up</h2>
                     <p style={{ color: "#667085" }}>
-                      Please fill your detail to access your account.
+                      Please fill your detail to create your account.
                     </p>
                   </div>
                   <div className="mt-4">
+                    <label htmlFor="name" className="mb-1">
+                      Name
+                    </label>
+                    <br />
+                    <Field
+                      type="name"
+                      id="name"
+                      name="name"
+                      className="border rounded-2 p-2  w-100"
+                    />
+                    <ErrorMessage
+                      name="name"
+                      component="div"
+                      className="error "
+                    />
+                  </div>
+                  <div className="mt-3">
                     <label htmlFor="email" className="mb-1">
                       Email
                     </label>
@@ -126,24 +154,41 @@ const Login = () => {
                       className="error"
                     />
                   </div>
-                  <div className="mt-2 d-flex justify-content-between">
-                    <div>
-                      <input type="checkbox" />
-                      <label htmlFor="checkbox" className="fw-normal ms-1">
-                        Remember me
-                      </label>
-                    </div>
-                    <Link to="/forgotpassword">
-                      <p
+                  <div className="mt-3">
+                    <label htmlFor="confirmPassword" className="mb-1">
+                      Confirm Password
+                    </label>
+                    <br />
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Field
+                        type={showPassword ? "text" : "password"}
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        className="border rounded-2 p-2 w-100 position-relative"
+                      />
+                      <img
+                        src="/passshow.svg"
+                        onClick={togglePasswordVisibility}
                         style={{
-                          color: "#00BF63",
+                          cursor: "pointer",
+                          marginLeft: "280px",
+                          position: "absolute",
                         }}
-                        className="fw-bold"
-                      >
-                        Forgot Password?
-                      </p>
-                    </Link>
+                        className="mobv-img"
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="confirmPassword"
+                      component="div"
+                      className="error"
+                    />
                   </div>
+                  <div className="mt-2 d-flex justify-content-between"></div>
                   <div className="mt-2">
                     <button
                       type="submit"
@@ -151,22 +196,20 @@ const Login = () => {
                       className="border rounded-2 p-2 w-100"
                       style={{ background: "#00BF63", color: "white" }}
                     >
-                      Sign In
+                      Sign Up
                     </button>
                   </div>
                   <div className="text-center mt-2">
-                    <Link to="/">
-                      <p>
-                        Don’t have an account?{" "}
-                        <span
-                          style={{
-                            color: "  #00BF63  ",
-                          }}
-                        >
-                          Sign up
-                        </span>
-                      </p>
-                    </Link>
+                    <p>
+                      Don’t have an account?{" "}
+                      <span
+                        style={{
+                          color: "  #00BF63  ",
+                        }}
+                      >
+                        Log In
+                      </span>
+                    </p>
                   </div>
                 </Form>
               )}
@@ -182,4 +225,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

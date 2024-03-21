@@ -33,7 +33,7 @@ const RegLocation = () => {
               className="border rounded-2 p-2 w-100"
               style={{ background: "#00BF63", color: "white" }}
             >
-              Done
+              Donez
             </button>
           </div>
         </div>

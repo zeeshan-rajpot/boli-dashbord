@@ -79,7 +79,7 @@ const mainPage = () => {
             />
           </Col>
         </Row>
-{/* main vvddddd*/}
+        {/* main vvddddd*/}
         <Row>
           <Col sm={12} md={6} className='mt-4'>
             <p
@@ -141,6 +141,15 @@ const mainPage = () => {
               placeholder='Please enter Company’s account number'
             />
           </Col>
+        </Row>
+
+        <hr />
+
+        <Row>
+          <Col>
+            <p>Add Restaurant images</p>
+          </Col>
+          <Col></Col>
         </Row>
 
         <Row className='mt-5'>

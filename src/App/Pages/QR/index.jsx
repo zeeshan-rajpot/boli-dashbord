@@ -3,6 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import NavBar from '../../Components/Navbar.jsx';
 import SideBar from '../../Components/Sidebar.jsx';
 import TableAssignQR from './TableAssignQR.jsx';
+import { Link } from 'react-router-dom';
 export const index = () => {
   return (
     <div>
@@ -45,21 +46,22 @@ export const index = () => {
                 >
                   QR codes
                 </p>
-
-                <button
-                  className='border-0'
-                  style={{
-                    backgroundColor: '#FFFFFF',
-                    boxShadow: ' 2px 4px 17.600000381469727px 0px #0000002B',
-                    padding: '10px 30px 10px 30px',
-                    color: '#00BF63',
-                    fontSize: '14px',
-                    borderRadius: '8px',
-                    fontWeight: '500',
-                  }}
-                >
-                  Add New
-                </button>
+                <Link to='/AddNewQr'>
+                  <button
+                    className='border-0'
+                    style={{
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: ' 2px 4px 17.600000381469727px 0px #0000002B',
+                      padding: '10px 30px 10px 30px',
+                      color: '#00BF63',
+                      fontSize: '14px',
+                      borderRadius: '8px',
+                      fontWeight: '500',
+                    }}
+                  >
+                    Add New
+                  </button>
+                </Link>
               </div>
 
               <Row className='my-4'>

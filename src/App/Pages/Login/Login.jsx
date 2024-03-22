@@ -155,9 +155,9 @@ const Login = () => {
                     </button>
                   </div>
                   <div className="text-center mt-2">
-                    <Link to="/">
-                      <p>
-                        Don’t have an account?{" "}
+                    <p>
+                      Don’t have an account?{" "}
+                      <Link to="/signup">
                         <span
                           style={{
                             color: "  #00BF63  ",
@@ -165,8 +165,8 @@ const Login = () => {
                         >
                           Sign up
                         </span>
-                      </p>
-                    </Link>
+                      </Link>
+                    </p>
                   </div>
                 </Form>
               )}

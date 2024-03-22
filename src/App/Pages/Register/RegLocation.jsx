@@ -6,10 +6,13 @@ const RegLocation = () => {
       className="ms-2 d-block d-md-flex  justify-content-around "
       style={{ height: "100vh" }}
     >
-      <div>
-        <h1 className="mt-5 " style={{ color: "#00BF63" }}>
+      <div  className="  h-100"> 
+        <div >
+
+        <h1 className="mt-5 " style={{ color: "#00BF63" ,marginTop:'100px'}}>
           BOLI
         </h1>
+        </div>
         <div className="d-flex flex-column justify-content-center h-75">
           <div>
             <h2 className="fw-bold">Location of your Restaurant</h2>

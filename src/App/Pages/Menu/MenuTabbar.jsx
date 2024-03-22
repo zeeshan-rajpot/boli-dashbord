@@ -42,6 +42,7 @@ const MenuTabbar = () => {
         </TabList>
         <TabList>
           <TabPanel component={Starter} id='Starter' />
+       
           <TabPanel component={Main} id='Main' />
           <TabPanel component={Desert} id='Desert' />
           <TabPanel component={Drink} id='Drink' />

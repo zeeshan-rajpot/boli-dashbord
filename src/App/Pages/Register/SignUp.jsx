@@ -1,12 +1,14 @@
 import { React, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Alert } from "react-bootstrap";
+import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { baseurl } from "../../../const";
 
 const SignUp = () => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const initialValues = {
@@ -43,15 +45,36 @@ const SignUp = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const response = await axios.post(
-        "https://boli.azurewebsites.net/api/restaurant/register",
+        `${baseurl}/api/restaurant/register`,
         values
       );
       console.log(response.data); // Handle the response from the server
-      Alert.success("Logged in successfully"); // Display a success message
-      nav("/")
+      toast.success(response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        // transition: Bounce,
+      }); // Display a success message
+      const routeWithParams = `/Otp?email=${encodeURIComponent(values.email)}`;
+      navigate(routeWithParams);
     } catch (error) {
       console.error("Error:", error); // Log any errors
-      Alert.error("Login failed"); // Display an error message
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        // transition: Bounce,
+      });  // Display an error message
     }
     setSubmitting(false);
   };
@@ -86,7 +109,7 @@ const SignUp = () => {
                       Please fill your detail to create your account.
                     </p>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-3">
                     <label htmlFor="name" className="mb-1">
                       Name
                     </label>
@@ -103,7 +126,7 @@ const SignUp = () => {
                       className="error "
                     />
                   </div>
-                  <div className="mt-3">
+                  <div className="mt-2">
                     <label htmlFor="email" className="mb-1">
                       Email
                     </label>
@@ -120,7 +143,7 @@ const SignUp = () => {
                       className="error "
                     />
                   </div>
-                  <div className="mt-3">
+                  <div className="mt-2">
                     <label htmlFor="password" className="mb-1">
                       Password
                     </label>
@@ -154,7 +177,7 @@ const SignUp = () => {
                       className="error"
                     />
                   </div>
-                  <div className="mt-3">
+                  <div className="mt-2">
                     <label htmlFor="confirmPassword" className="mb-1">
                       Confirm Password
                     </label>
@@ -196,19 +219,19 @@ const SignUp = () => {
                       className="border rounded-2 p-2 w-100"
                       style={{ background: "#00BF63", color: "white" }}
                     >
-                      Sign Up
+                      {isSubmitting ? "Submitting..." : "Sign Up"}
                     </button>
                   </div>
                   <div className="text-center mt-2">
                     <p>
                       Don’t have an account?{" "}
-                      <span
+                      <Link to='/'
                         style={{
                           color: "  #00BF63  ",
                         }}
                       >
                         Log In
-                      </span>
+                      </Link>
                     </p>
                   </div>
                 </Form>
@@ -221,6 +244,23 @@ const SignUp = () => {
           <img src="/Frame 1.png" alt="" srcset="" className="w-100 h-auto" />
         </div>
       </div>
+
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+
+      />
+      {/* Same as */}
+      <ToastContainer />
     </>
   );
 };

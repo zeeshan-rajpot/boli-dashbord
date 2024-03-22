@@ -5,7 +5,7 @@
   /* Adjust the width as needed */
   text-align: center;
   font-size: 20px;
-  width: 15px !important;
+  /* width: 15px !important; */
 }
 
 .inputStyle input:focus {

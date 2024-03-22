@@ -42,10 +42,11 @@ const MenuTabbar = () =>
           </TabList>
         </TabList>
         <TabList>
-          <TabPanel component={ Starter } id='Starter' />
-          <TabPanel component={ Main } id='Main' />
-          <TabPanel component={ Desert } id='Desert' />
-          <TabPanel component={ Drink } id='Drink' />
+          <TabPanel component={Starter} id='Starter' />
+       
+          <TabPanel component={Main} id='Main' />
+          <TabPanel component={Desert} id='Desert' />
+          <TabPanel component={Drink} id='Drink' />
         </TabList>
       </Tabs>
     </div>

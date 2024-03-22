@@ -13,7 +13,7 @@ const OtpVerification = () => {
         <h1 className="mt-5 " style={{ color: "#00BF63" }}>
           BOLI
         </h1>
-        <div className="d-flex flex-column justify-content-center h-75">
+        <div className="d-flex flex-column justify-content-center h-75 mobv-login">
           <div>
             <h2 className="fw-bold">Verification Code</h2>
             <p className="w-75" style={{ color: "#667085" }}>

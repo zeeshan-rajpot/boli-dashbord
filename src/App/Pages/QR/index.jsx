@@ -77,6 +77,18 @@ export const index = () => {
                 <Col lg={3} md={3} xl={3} xs={6}>
                   <TableAssignQR />
                 </Col>
+                <Col lg={3} md={3} xl={3} xs={6}>
+                  <TableAssignQR />
+                </Col>
+                <Col lg={3} md={3} xl={3} xs={6}>
+                  <TableAssignQR />
+                </Col>
+                <Col lg={3} md={3} xl={3} xs={6}>
+                  <TableAssignQR />
+                </Col>
+                <Col lg={3} md={3} xl={3} xs={6}>
+                  <TableAssignQR />
+                </Col>
               </Row>
             </Row>
           </Col>

@@ -1,72 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { baseUrl } from '../../Components/constants.jsx';
 
-export const Upcomming = () => {
-  const data = [
-    {
-      id: 1,
-      maindate: '27/02/2024',
-      name: 'Thomas Shelby',
-      date: '16/02/2024',
-      table: 'Table of 1',
-      time: '08:00 PM',
-    },
-    {
-      id: 1,
-      maindate: '',
-      name: 'Thomas Shelby',
-      date: '16/02/2024',
-      table: 'Table of 1',
-      time: '08:00 PM',
-    },
-    {
-      id: 1,
-      maindate: '',
-      name: 'Thomas Shelby',
-      date: '16/02/2024',
-      table: 'Table of 1',
-      time: '08:00 PM',
-    },
-    {
-      id: 1,
-      maindate: '26/02/2024',
-      name: 'Thomas Shelby',
-      date: '16/02/2024',
-      table: 'Table of 1',
-      time: '08:00 PM',
-    },
-    {
-      id: 1,
-      maindate: '',
-      name: 'Thomas Shelby',
-      date: '16/02/2024',
-      table: 'Table of 1',
-      time: '08:00 PM',
-    },
-    {
-      id: 1,
-      maindate: '',
-      name: 'Thomas Shelby',
-      date: '16/02/2024',
-      table: 'Table of 1',
-      time: '08:00 PM',
-    },
-    {
-      id: 1,
-      maindate: '',
-      name: 'Thomas Shelby',
-      date: '16/02/2024',
-      table: 'Table of 1',
-      time: '08:00 PM',
-    },
-    {
-      id: 1,
-      maindate: '',
-      name: 'Thomas Shelby',
-      date: '16/02/2024',
-      table: 'Table of 1',
-      time: '08:00 PM',
-    },
-  ];
+export const Upcoming = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Token not found');
+        }
+
+        const response = await fetch(
+          `${baseUrl}/api/customer/getReservations?status=upcoming`,
+          {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (!response.ok) {
+          const errorMessage = await response.text();
+          throw new Error(`Network response was not ok: ${errorMessage}`);
+        }
+
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error('API Error:', error.message); // Log the error to the console
+        setError('Failed to fetch data. Please try again later.'); // Set the error state
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array to run the effect only once on component mount
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    console.log(error); // Log the error to the console
+    return <div>Error: {error}</div>; // Display the error in the UI
+  }
+
+  if (data.length === 0) {
+    return <div>No upcoming reservations found.</div>;
+  }
+
   return (
     <div>
       {data.map((item, index) => (
@@ -139,4 +128,5 @@ export const Upcomming = () => {
     </div>
   );
 };
-export default Upcomming;
+
+export default Upcoming;

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap");
+@import 'react-toastify/dist/ReactToastify.css';
 
 body {
   margin: 0;
@@ -62,7 +63,8 @@ body {
   background: #00bf63;
   border-radius: 5px;
 }
-.error{
+
+.error {
   color: red;
   font-size: 12px;
 }
@@ -87,6 +89,7 @@ body {
   .dis {
     display: none;
   }
+
   .mart100 {
     margin-top: 100px !important;
   }
@@ -95,6 +98,7 @@ body {
     width: 95%;
     margin-top: 5rem !important;
   }
+
   .mobv-img {
     margin-left: 330px !important;
   }

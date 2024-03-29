@@ -1,8 +1,52 @@
-import React from 'react';
+import axios from 'axios'; // Import axios
+import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../../../Components/Navbar.jsx';
 import SideBar from '../../../Components/Sidebar.jsx';
+import { baseUrl } from '../../../Components/constants.jsx';
+
 export const AddNewCategory = () => {
+  const [textData, setTextData] = useState({
+    categoryName: '',
+  });
+
+  const handleDoneClick = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('name', textData.categoryName);
+
+      console.log('Form Data:', formData);
+
+      console.log('Category Name:', textData.categoryName); // Log category name
+
+      const response = await axios.post(
+        `${baseUrl}/api/restaurant/addCategory`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      console.log('hello');
+      console.log(response.data.message);
+    } catch (error) {
+      handleApiError(error);
+    }
+  };
+
+  const handleApiError = error => {
+    if (error.response) {
+      console.error('API Error Status:', error.response.status);
+      console.error('API Error Data:', error.response.data);
+    } else if (error.request) {
+      console.error('No response received:', error.request);
+    } else {
+      console.error('Error setting up the request:', error.message);
+    }
+  };
+
   return (
     <div>
       <Container fluid className='  h-100'>
@@ -53,7 +97,7 @@ export const AddNewCategory = () => {
                       </p>
                     </Col>
                     <Col lg={1} className='text-end'>
-                      <div role='button' style={{ width: '45%' }}>
+                      <div style={{ width: '45%' }}>
                         <p
                           className='my-0'
                           style={{
@@ -72,6 +116,13 @@ export const AddNewCategory = () => {
                     <Col lg={4}>
                       <input
                         type='text'
+                        onChange={e => {
+                          console.log('Input Value:', e.target.value);
+                          setTextData({
+                            ...textData,
+                            categoryName: e.target.value,
+                          });
+                        }}
                         className='w-100 border-0 p-2 rounded-2  shadow '
                         placeholder='Name'
                       />
@@ -94,230 +145,12 @@ export const AddNewCategory = () => {
                         color: '#00BF63',
                         boxShadow: '2px 4px 17.600000381469727px 0px #0000002B',
                       }}
-                      onClick={() => handleButtonClick('NewCategory')}
+                      onClick={handleDoneClick}
                     >
                       Add New Category
                     </button>
                   </Col>
                   <Col lg={8}></Col>
-                </Row>
-
-                <Row className='my-5'>
-                  <Col>
-                    <p
-                      style={{
-                        color: '#4C535F',
-                        fontSize: '16px',
-                        fontWeight: '500',
-                      }}
-                    >
-                      Added Categories
-                    </p>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col lg={5}>
-                    <div
-                      className='p-3 mb-3'
-                      style={{
-                        borderRadius: '8px',
-                        backgroundColor: '#FFFFFF',
-                        boxShadow: '1px 2px 11.100000381469727px 0px #0000001A',
-                      }}
-                    >
-                      <p
-                        style={{
-                          color: '#4C535F',
-                          fontSize: '16px',
-                          fontWeight: '500',
-                        }}
-                        className='my-0'
-                      >
-                        STARTER
-                      </p>
-                    </div>
-                  </Col>
-                  <Col lg={5}></Col>
-                  <Col lg={1}>
-                    <div className='d-flex' role='button'>
-                      <img src='/Trash Bin.svg' alt='' className='me-2' />
-                      <button
-                        className=' d-flex bg-transparent '
-                        style={{
-                          color: '#FD342A',
-                          borderTop: '0px',
-                          borderLeft: '0px',
-                          borderRight: '0px',
-                          fontSize: '16px',
-                          fontWeight: '500',
-                          borderBottom: '1px solid #FD342A',
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </Col>
-
-                  <Col lg={5}>
-                    <div
-                      className='p-3 mb-3'
-                      style={{
-                        borderRadius: '8px',
-                        backgroundColor: '#FFFFFF',
-                        boxShadow: '1px 2px 11.100000381469727px 0px #0000001A',
-                      }}
-                    >
-                      <p
-                        style={{
-                          color: '#4C535F',
-                          fontSize: '16px',
-                          fontWeight: '500',
-                        }}
-                        className='my-0'
-                      >
-                        MAIN
-                      </p>
-                    </div>
-                  </Col>
-                  <Col lg={5}></Col>
-                  <Col lg={1}>
-                    <div className='d-flex' role='button'>
-                      <img src='/Trash Bin.svg' alt='' className='me-2' />
-                      <button
-                        className=' d-flex bg-transparent '
-                        style={{
-                          color: '#FD342A',
-                          borderTop: '0px',
-                          borderLeft: '0px',
-                          borderRight: '0px',
-                          fontSize: '16px',
-                          fontWeight: '500',
-                          borderBottom: '1px solid #FD342A',
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </Col>
-
-                  <Col lg={5}>
-                    <div
-                      className='p-3 mb-3'
-                      style={{
-                        borderRadius: '8px',
-                        backgroundColor: '#FFFFFF',
-                        boxShadow: '1px 2px 11.100000381469727px 0px #0000001A',
-                      }}
-                    >
-                      <p
-                        style={{
-                          color: '#4C535F',
-                          fontSize: '16px',
-                          fontWeight: '500',
-                        }}
-                        className='my-0'
-                      >
-                        DESSERT
-                      </p>
-                    </div>
-                  </Col>
-                  <Col lg={5}></Col>
-                  <Col lg={1}>
-                    <div className='d-flex' role='button'>
-                      <img src='/Trash Bin.svg' alt='' className='me-2' />
-                      <button
-                        className=' d-flex bg-transparent '
-                        style={{
-                          color: '#FD342A',
-                          borderTop: '0px',
-                          borderLeft: '0px',
-                          borderRight: '0px',
-                          fontSize: '16px',
-                          fontWeight: '500',
-                          borderBottom: '1px solid #FD342A',
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </Col>
-                  <Col lg={5}>
-                    <div
-                      className='p-3 mb-3'
-                      style={{
-                        borderRadius: '8px',
-                        backgroundColor: '#FFFFFF',
-                        boxShadow: '1px 2px 11.100000381469727px 0px #0000001A',
-                      }}
-                    >
-                      <p
-                        style={{
-                          color: '#4C535F',
-                          fontSize: '16px',
-                          fontWeight: '500',
-                        }}
-                        className='my-0'
-                      >
-                        DRINK
-                      </p>
-                    </div>
-                  </Col>
-                  <Col lg={5}></Col>
-                  <Col lg={1}>
-                    <div className='d-flex' role='button'>
-                      <img src='/Trash Bin.svg' alt='' className='me-2' />
-                      <button
-                        className=' d-flex bg-transparent '
-                        style={{
-                          color: '#FD342A',
-                          borderTop: '0px',
-                          borderLeft: '0px',
-                          borderRight: '0px',
-                          fontSize: '16px',
-                          fontWeight: '500',
-                          borderBottom: '1px solid #FD342A',
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col lg={8}></Col>
-                  <Col lg={2}>
-                    <button
-                      className='w-100'
-                      style={{
-                        backgroundColor: '#FFFFFF',
-                        color: '#00BF63',
-                        borderRadius: '8px',
-                        padding: '11px 30px 11px 30px',
-                        fontSize: '16px',
-                        fontWeight: '500',
-                        border: '1px solid #00BF63',
-                      }}
-                    >
-                      Back
-                    </button>
-                  </Col>
-                  <Col lg={2}>
-                    <button
-                      className='border-0 w-100'
-                      style={{
-                        padding: '11px 30px 11px 30px',
-                        backgroundColor: '#00BF63',
-                        color: '#FFFFFF',
-                        borderRadius: '8px',
-                        fontSize: '16px',
-                        fontWeight: '500',
-                      }}
-                    >
-                      Done
-                    </button>
-                  </Col>
                 </Row>
               </div>
             </Row>

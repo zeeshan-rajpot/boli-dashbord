@@ -33,7 +33,7 @@ export const index = () => {
                 // overflowY: 'auto',
                 // height: '100vh',
                 backgroundColor: '#FFFFFF',
-                boxShadow: '2px 4px 71.80000305175781px 0px #0000000F',
+                boxShadow: '2px 6px 71.80000405175781px 0px #0000000F',
               }}
             >
               <div className='p-3 d-flex justify-content-between align-items-center '>
@@ -64,29 +64,8 @@ export const index = () => {
                 </Link>
               </div>
 
-              <Row className='my-4'>
-                <Col lg={3} md={3} xl={3} xs={6}>
-                  <TableAssignQR />
-                </Col>
-                <Col lg={3} md={3} xl={3} xs={6}>
-                  <TableAssignQR />
-                </Col>
-                <Col lg={3} md={3} xl={3} xs={6}>
-                  <TableAssignQR />
-                </Col>
-                <Col lg={3} md={3} xl={3} xs={6}>
-                  <TableAssignQR />
-                </Col>
-                <Col lg={3} md={3} xl={3} xs={6}>
-                  <TableAssignQR />
-                </Col>
-                <Col lg={3} md={3} xl={3} xs={6}>
-                  <TableAssignQR />
-                </Col>
-                <Col lg={3} md={3} xl={3} xs={6}>
-                  <TableAssignQR />
-                </Col>
-                <Col lg={3} md={3} xl={3} xs={6}>
+              <Row className='my-3'>
+                <Col lg={12} md={12} xl={12} xs={12}>
                   <TableAssignQR />
                 </Col>
               </Row>

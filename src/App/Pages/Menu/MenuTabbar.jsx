@@ -1,22 +1,86 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-re-super-tabs';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import MenuTab from '../../Components/Tabbarmenu.jsx';
-import Desert from './MenuPages/Desert.jsx';
-import Drink from './MenuPages/Drink.jsx';
-import Main from './MenuPages/Main.jsx';
-import Starter from './MenuPages/Starter.jsx';
+import { baseUrl } from '../../Components/constants.jsx';
+
 const MenuTabbar = () => {
+  const [menuData, setMenuData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchMenuData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Authentication token not found');
+        }
+
+        const response = await axios.get(`${baseUrl}/api/restaurant/getMenu`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+
+        if (response.data.message === 'Menu fetched successfully') {
+          const menuItems = response.data.menu.items;
+          const categorizedMenu = {};
+
+          menuItems.forEach(item => {
+            const category = item.category.name;
+            if (!categorizedMenu[category]) {
+              categorizedMenu[category] = [];
+            }
+            categorizedMenu[category].push(item);
+          });
+
+          setMenuData(categorizedMenu);
+          console.log('Error for api', response.data);
+
+          setError(null);
+        } else {
+          throw new Error('Failed to fetch menu data');
+        }
+      } catch (error) {
+        console.error('Error fetching menu data:', response.data);
+        toast.error(`Error fetching menu data: ${response.data}`);
+        setError(error.message);
+      }
+    };
+
+    fetchMenuData();
+  }, []);
   return (
     <div>
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+        transition='Bounce'
+      />
       <Tabs activeTab='Starter'>
         <TabList className='d-flex flex-column flex-sm-row justify-content-between align-items-center'>
           <TabList>
-            <Tab component={MenuTab} label='STARTER' id='Starter' />
-            <Tab component={MenuTab} label='MAIN ' id='Main' />
-            <Tab component={MenuTab} label='DESSERT' id='Desert' />
-            <Tab component={MenuTab} label='DRINK' id='Drink' />
+            {menuData &&
+              Object.keys(menuData).map(category => (
+                <Tab
+                  key={category}
+                  component={MenuTab}
+                  label={category.toUpperCase()}
+                  id={category}
+                />
+              ))}
           </TabList>
+
           <TabList>
             <Link to='/Add'>
               <button
@@ -41,11 +105,17 @@ const MenuTabbar = () => {
           </TabList>
         </TabList>
         <TabList>
-          <TabPanel component={Starter} id='Starter' />
-       
-          <TabPanel component={Main} id='Main' />
-          <TabPanel component={Desert} id='Desert' />
-          <TabPanel component={Drink} id='Drink' />
+          {menuData &&
+            Object.keys(menuData).map(category => (
+              <TabPanel key={category}>
+                {menuData[category].map(item => (
+                  <div key={item._id}>
+                    <p>Name: {item.name}</p>
+                    <p>Price: ${item.price}</p>
+                  </div>
+                ))}
+              </TabPanel>
+            ))}
         </TabList>
       </Tabs>
     </div>

@@ -39,49 +39,50 @@ const data = [
   },
 ];
 
-const SidePageCard = ({ item }) => {
+const SidePageCard = ( { item } ) =>
+{
   return (
     <div>
       <div
         className='d-flex shadow rounded-4 p-2 mt-4 justify-content-between align-items-center'
-        style={{ backgroundColor: '#FFFFFF' }}
+        style={ { backgroundColor: '#FFFFFF' } }
       >
         <div className='d-flex justify-content-start align-items-start w-50'>
           <div
-            style={{
+            style={ {
               width: '70px',
               height: '70px',
               borderRadius: '15px',
               overflow: 'hidden',
-            }}
+            } }
           >
             <img
-              src={item.imageUrl}
+              src={ item.imageUrl }
               alt=''
               className='w-100 h-100 object-cover'
             />
           </div>
-          <div className='pt-4 ms-2' style={{ height: '70px' }}>
+          <div className='pt-4 ms-2' style={ { height: '70px' } }>
             <p
               className='ms-2 resfont'
-              style={{ color: '#222222', fontWeight: '500' }}
+              style={ { color: '#222222', fontWeight: '500' } }
             >
-              {item.name}
+              { item.name }
             </p>
           </div>
         </div>
         <div className='d-flex justify-content-between align-items-center w-25'>
-          <p style={{ color: '#444444' }}>X{item.quantity}</p>
+          <p style={ { color: '#444444' } }>X{ item.quantity }</p>
           <p
             className='ms-0 ms-md-5 text-nowrap resfont'
-            style={{ color: '#444444' }}
+            style={ { color: '#444444' } }
           >
-            {item.notes}
+            { item.notes }
           </p>
         </div>
         <div className='w-25 text-end resfont'>
-          <p style={{ color: '#212121', fontWeight: '600' }}>
-            ${item.price.toFixed(2)}
+          <p style={ { color: '#212121', fontWeight: '600' } }>
+            ${ item.price.toFixed( 2 ) }
           </p>
         </div>
       </div>
@@ -89,25 +90,26 @@ const SidePageCard = ({ item }) => {
   );
 };
 
-const SidePageCardList = () => {
+const SidePageCardList = ( { data, discountAmount, totalAmount } ) =>
+{
   return (
     <div>
-      {data.map(item => (
-        <SidePageCard key={item.id} item={item} />
-      ))}
+      { data.map( item => (
+        <SidePageCard key={ item.id } item={ item } />
+      ) ) }
       <div className='d-flex justify-content-between align-items-center my-4'>
         <div className='d-flex flex-column justify-content-start align-items-start '>
           <div>
             <p
-              style={{ color: '#717171', fontSize: '14px', fontWeight: '400' }}
+              style={ { color: '#717171', fontSize: '14px', fontWeight: '400' } }
             >
-              Status:{' '}
+              Status:{ ' ' }
               <span
-                style={{
+                style={ {
                   color: '#00BF63',
                   fontSize: '14px',
                   fontWeight: '500',
-                }}
+                } }
               >
                 Confirmed
               </span>
@@ -115,15 +117,15 @@ const SidePageCardList = () => {
           </div>
           <div className='mt-2'>
             <p
-              style={{ color: '#717171', fontSize: '14px', fontWeight: '400' }}
+              style={ { color: '#717171', fontSize: '14px', fontWeight: '400' } }
             >
-              Preparation Time{' '}
+              Preparation Time{ ' ' }
               <span
-                style={{
+                style={ {
                   color: '#00BF63',
                   fontSize: '14px',
                   fontWeight: '500',
-                }}
+                } }
               >
                 00h: 25m: 30s
               </span>
@@ -132,22 +134,23 @@ const SidePageCardList = () => {
         </div>
         <div className='d-flex flex-column justify-content-end align-items-end '>
           <div>
-            <p style={{ color: '#717171' }}>
-              Total{' '}
-              <span style={{ color: '#222222', fontWeight: '500' }}>
-                $60:00
+            <p style={ { color: '#717171' } }>
+              Total{ ' ' }:
+              <span style={ { color: '#222222', fontWeight: '500', fontSize: '18px' } }>
+                ${ totalAmount }
+              </span>
+            </p>
+          </div>
+          <div className='mt-2'>
+            <p style={ { color: '#717171' } }>
+              discount{ ' ' }:
+              <span style={ { color: '#717171', fontWeight: '400', fontSize: '18px' } }>
+                ${ discountAmount }
               </span>
             </p>
           </div>
 
-          <div className='mt-2'>
-            <button
-              className='rounded-5 border-0 px-3 py-2'
-              style={{ backgroundColor: '#00BF63', color: '#FFFF' }}
-            >
-              Cancel
-            </button>
-          </div>
+
         </div>
       </div>
     </div>

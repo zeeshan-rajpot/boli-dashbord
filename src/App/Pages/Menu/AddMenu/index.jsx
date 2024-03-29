@@ -1,33 +1,38 @@
 import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Navbar from '../../../Components/Navbar.jsx';
 import SideBar from '../../../Components/Sidebar.jsx';
 export const index = () => {
   const [activeButton, setActiveButton] = useState('STARTER');
-  const [isActive, setIsActive] = useState(true); // Initially, set the first item as active
+  const [isActive, setIsActive] = useState(true);
+  const [keywordInput, setKeywordInput] = useState('');
+  const [data, setData] = useState({
+    keywords: ['Hot Chocolate', 'Oreo Stick', 'Cappuccino'],
+  }); // Initialize data state with keywords array
 
   const toggleActive = () => {
-    setIsActive(!isActive); // Toggle the active state
+    setIsActive(!isActive);
   };
+
   const handleButtonClick = buttonName => {
     setActiveButton(buttonName);
   };
-  const [items, setItems] = useState([
-    'Hot Chocolate',
-    'Cappuccino',
-    'Oreo Stick',
-  ]); // Initial list of items
 
-  // Function to handle adding a new item
-  const addItem = itemName => {
-    setItems([...items, itemName]);
+  const addKeyword = () => {
+    if (keywordInput.trim() !== '') {
+      setData({
+        ...data,
+        keywords: [...data.keywords, keywordInput],
+      });
+      setKeywordInput('');
+    }
   };
 
-  // Function to handle removing an item
-  const removeItem = index => {
-    const updatedItems = [...items];
-    updatedItems.splice(index, 1);
-    setItems(updatedItems);
+  const removeKeyword = index => {
+    const updatedKeywords = [...data.keywords];
+    updatedKeywords.splice(index, 1);
+    setData({ ...data, keywords: updatedKeywords });
   };
   return (
     <div>
@@ -148,24 +153,27 @@ export const index = () => {
                         DRINK
                       </button>
                     </Col>
+
                     <Col lg={4} md={3} xs={6}>
-                      <button
-                        className=' shadow w-100'
-                        style={{
-                          padding: '10px 30px',
-                          borderRadius: '8px',
-                          border: '1px solid #00BF63',
-                          fontSize: '14px',
-                          fontWeight: '500',
-                          backgroundColor: '#00BF6314',
-                          color: '#00BF63',
-                          boxShadow:
-                            '2px 4px 17.600000381469727px 0px #0000002B',
-                        }}
-                        onClick={() => handleButtonClick('NewCategory')}
-                      >
-                        Add New Category
-                      </button>
+                      <Link to='/AddNewCategory'>
+                        <button
+                          className=' shadow w-100'
+                          style={{
+                            padding: '10px 30px',
+                            borderRadius: '8px',
+                            border: '1px solid #00BF63',
+                            fontSize: '14px',
+                            fontWeight: '500',
+                            backgroundColor: '#00BF6314',
+                            color: '#00BF63',
+                            boxShadow:
+                              '2px 4px 17.600000381469727px 0px #0000002B',
+                          }}
+                          onClick={() => handleButtonClick('NewCategory')}
+                        >
+                          Add New Category
+                        </button>
+                      </Link>
                     </Col>
                   </Row>
                 </div>
@@ -330,45 +338,60 @@ export const index = () => {
                       Choose items to add
                     </p>
 
-                    <div
-                      style={{
-                        boxShadow: '1px 2px 11.100000381469727px 0px #0000001A',
-                        borderRadius: '8px',
-                        backgroundColor: '#FFFFFF',
-                      }}
-                    >
+                    <div className='d-flex flex-column justify-content-start align-items-start w-100 '>
                       <div
-                        className='d-flex w-100 justify-content-center align-items-center'
                         style={{
-                          backgroundColor: '#F9F9F9',
-                          padding: '8px',
-                          borderRadius: '2px',
-                          marginBottom: '4px',
+                          boxShadow:
+                            '1px 2px 11.100000381469727px 0px #0000001A',
+                          borderRadius: '8px',
+                          backgroundColor: '#FFFFFF',
                         }}
                       >
-                        {items.map((item, index) => (
-                          <>
-                            <p
-                              className=''
-                              key={index}
-                              style={{
-                                color: '#A6A6A6',
-                                fontSize: '14px',
-                                fontWeight: '400',
-                                margin: '0',
-                              }}
-                            >
-                              {item}
-                            </p>
+                        <input
+                          className='d-flex  p-1 w-100 justify-content-start align-items-start border-0 '
+                          style={{
+                            backgroundColor: '#F9F9F9',
+                            padding: '8px',
+                            borderRadius: '2px',
+                            marginBottom: '4px',
+                          }}
+                          placeholder='Add more Keywords |'
+                          value={keywordInput}
+                          onChange={e => setKeywordInput(e.target.value)}
+                          onKeyPress={e => {
+                            if (e.key === 'Enter') {
+                              addKeyword();
+                            }
+                          }}
+                          required
+                        />
+                      </div>
+
+                      <div className='d-flex'>
+                        {data.keywords.map((keyword, index) => (
+                          <div
+                            key={index}
+                            className='rounded-5 p-2 me-2 text-center mt-2 d-flex text-nowrap '
+                            style={{
+                              backgroundColor: '#F9F9F9',
+                              color: '#A6A6A6',
+                              fontsize: '14px',
+                              fontWeight: '400',
+                              cursor: 'pointer',
+                              padding: '2px',
+                              borderRadius: '2px',
+                              width: 'auto',
+                            }}
+                          >
+                            {keyword}
                             <img
                               role='button'
                               src='/Cross.svg'
                               alt='Remove'
-                              className='ms-3 pe-2'
-                              onClick={() => removeItem(index)}
-                              style={{ width: '20px', height: '20px' }}
+                              className='ms-3 '
+                              onClick={() => removeKeyword(index)}
                             />
-                          </>
+                          </div>
                         ))}
                       </div>
                     </div>

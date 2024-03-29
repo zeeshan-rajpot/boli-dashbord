@@ -5,48 +5,51 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../../../Components/Navbar.jsx';
 import SideBar from '../../../Components/Sidebar.jsx';
 import { baseUrl } from '../../../Components/constants.jsx';
-
+import GetCategory from './GetCategory.jsx';
 export const AddNewCategory = () => {
-  const [textData, setTextData] = useState({
-    categoryName: '',
-  });
+  const [name, setName] = useState('');
 
-  const handleDoneClick = async () => {
+  const handleAddCategory = async name => {
     try {
-      const formData = new FormData();
-      formData.append('name', textData.categoryName);
+      // Ensure name is not empty
+      if (!name.trim()) {
+        console.error('Category name cannot be empty');
+        return;
+      }
 
-      console.log('Form Data:', formData);
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('Token not found in localStorage');
+        return;
+      }
 
-      console.log('Category Name:', textData.categoryName); // Log category name
+      console.log('Sending request with name:', name); // Log the name value just before making the request
 
       const response = await axios.post(
         `${baseUrl}/api/restaurant/addCategory`,
-        formData,
+        { categoryName: name }, // Send categoryName instead of name
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log('hello');
-      console.log(response.data.message);
+      console.log('Category added successfully:', response.data);
+      // Add any further logic here after successful response from server
     } catch (error) {
-      handleApiError(error);
+      console.error('Error while adding category:', error);
+      // Handle error here
     }
   };
 
-  const handleApiError = error => {
-    if (error.response) {
-      console.error('API Error Status:', error.response.status);
-      console.error('API Error Data:', error.response.data);
-    } else if (error.request) {
-      console.error('No response received:', error.request);
-    } else {
-      console.error('Error setting up the request:', error.message);
-    }
+  const handleChange = event => {
+    setName(event.target.value);
   };
 
+  const handleClickAddCategory = () => {
+    handleAddCategory(name); // Pass the current value of name to handleAddCategory
+  };
   return (
     <div>
       <Container fluid className='  h-100'>
@@ -106,6 +109,7 @@ export const AddNewCategory = () => {
                             fontWeight: '500',
                             borderBottom: '1px solid #00BF63',
                           }}
+                          // onClick={handleAddCategory}
                         >
                           Add
                         </p>
@@ -116,15 +120,10 @@ export const AddNewCategory = () => {
                     <Col lg={4}>
                       <input
                         type='text'
-                        onChange={e => {
-                          console.log('Input Value:', e.target.value);
-                          setTextData({
-                            ...textData,
-                            categoryName: e.target.value,
-                          });
-                        }}
                         className='w-100 border-0 p-2 rounded-2  shadow '
                         placeholder='Name'
+                        value={name}
+                        onChange={handleChange}
                       />
                     </Col>
                     <Col lg={8}></Col>
@@ -145,12 +144,28 @@ export const AddNewCategory = () => {
                         color: '#00BF63',
                         boxShadow: '2px 4px 17.600000381469727px 0px #0000002B',
                       }}
-                      onClick={handleDoneClick}
+                      onClick={handleClickAddCategory}
                     >
                       Add New Category
                     </button>
                   </Col>
                   <Col lg={8}></Col>
+                  <Row className='my-5'>
+                    <Col>
+                      <p
+                        style={{
+                          color: '#4C535F',
+                          fontSize: '16px',
+                          fontWeight: '500',
+                        }}
+                      >
+                        Added Categories
+                      </p>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <GetCategory />
+                  </Row>
                 </Row>
               </div>
             </Row>

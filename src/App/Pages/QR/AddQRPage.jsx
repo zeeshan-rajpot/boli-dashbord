@@ -10,11 +10,26 @@ export const AddQRPage = () => {
     tableno: '',
     image: null,
   });
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleImageChange = e => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
     setTextData({ ...textData, image: file });
+
+    }
+
   };
+
+  let fileInputRef;
+  // const handleImageChange = e => {
+  //   const file = e.target.files[0];
+  // };
 
   const handleDoneClick = async () => {
     try {
@@ -23,7 +38,7 @@ export const AddQRPage = () => {
       // Custom validation: Check if the input value is empty or contains non-numeric characters
       const tableNumber = textData.tableno.trim(); // Remove leading/trailing spaces
       if (!/^\d+$/.test(tableNumber)) {
-        console.error('Table number is not a valid number');
+        toast.error('Table number is not a valid number');
         return;
       }
 
@@ -42,7 +57,7 @@ export const AddQRPage = () => {
           },
         }
       );
-      toast.success(response.data, {
+      toast.success(response.data.message, {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -64,22 +79,22 @@ export const AddQRPage = () => {
         progress: undefined,
         theme: 'light',
       });
-      handleApiError(error);
+      // handleApiError(error);
     }
   };
 
-  const handleApiError = error => {
-    if (error.response) {
-      console.error('API Error Status:', error.response.status);
-      console.error('API Error Data:', error.response.data);
-    } else if (error.request) {
-      console.error('No response received:', error.request);
-    } else {
-      console.error('Error setting up the request:', error.message);
-    }
-  };
+  // const handleApiError = error => {
+  //   if (error.response) {
+  //     console.error('API Error Status:', error.response.status);
+  //     console.error('API Error Data:', error.response.data);
+  //   } else if (error.request) {
+  //     console.error('No response received:', error.request);
+  //   } else {
+  //     console.error('Error setting up the request:', error.message);
+  //   }
+  // };
 
-  let fileInputRef;
+  // let fileInputRef;
 
   return (
     <div>
@@ -160,28 +175,40 @@ export const AddQRPage = () => {
             </p>
 
             <div
-              className='text-center py-5'
+              className='text-center d-flex align-items-center justify-content-center'
               style={{
                 borderRadius: '5.31px',
                 boxShadow:
                   ' 0.6638888716697693px 1.3277777433395386px 7.369166851043701px 0px #0000001A',
+                  width:'300px'
+                  , height:'300px'
               }}
             >
               {/* Input for selecting image */}
               <input
-                type='file'
-                accept='image/*'
-                onChange={handleImageChange}
-                style={{ display: 'none' }}
-                ref={input => (fileInputRef = input)} // Assign the ref to fileInputRef
-              />
-              <img
-                src='/uploadQR.png'
-                alt=''
-                className='my-5'
-                onClick={() => fileInputRef.click()} // Use fileInputRef to trigger click
-                style={{ cursor: 'pointer' }}
-              />
+        type='file'
+        accept='image/*'
+        onChange={handleImageChange}
+        style={{ display: 'none' }}
+        ref={(input) => (fileInputRef = input)}
+      />
+      {selectedImage ? (
+        <img
+          src={selectedImage}
+          alt='Selected'
+          className='my-5'
+          onClick={() => fileInputRef.click()}
+          style={{ cursor: 'pointer' ,width:'300px', height:'300px' ,objectFit:'contain' }}
+        />
+      ) : (
+        <img
+          src='/uploadQR.png'
+          alt='Upload QR'
+          className='my-5'
+          onClick={() => fileInputRef.click()}
+          style={{ cursor: 'pointer'  }}
+        />
+      )}
             </div>
           </Col>
         </Row>

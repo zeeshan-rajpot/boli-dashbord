@@ -10,6 +10,7 @@ export const Upcoming = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
+        console.log(token)
         if (!token) {
           throw new Error('Token not found');
         }

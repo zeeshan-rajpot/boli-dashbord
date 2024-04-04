@@ -1,41 +1,219 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Navbar from '../../../Components/Navbar.jsx';
 import SideBar from '../../../Components/Sidebar.jsx';
+import { baseurl } from '../../../../const.js';
 export const index = () => {
-  const [activeButton, setActiveButton] = useState('STARTER');
+
+  const [categories, setCategories] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState('');
+
+  useEffect(() => {
+    // Define a function to fetch the data
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        };
+
+        const response = await axios.get(`${baseurl}/api/restaurant/getCategories`, config);
+        console.log(response.data.categories)
+
+        setCategories(response.data.categories); // Assuming the response data is an array of categories
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  // console.log("sss"+ categories[0]?.name)
+
+  const [activeButton, setActiveButton] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
   const [isActive, setIsActive] = useState(true);
-  const [keywordInput, setKeywordInput] = useState('');
-  const [data, setData] = useState({
-    keywords: ['Hot Chocolate', 'Oreo Stick', 'Cappuccino'],
-  }); // Initialize data state with keywords array
+  const [itemName, setItemName] = useState('');
+  const [price, setPrice] = useState('');
+  const [itemimg, setItemimg] = useState('');
+  const [addons, setAddons] = useState([]);
+  let fileInputRef;
 
   const toggleActive = () => {
     setIsActive(!isActive);
   };
 
-  const handleButtonClick = buttonName => {
-    setActiveButton(buttonName);
+  // const handleButtonClick = buttonName => {
+  //   setActiveButton(buttonName);
+  // };
+  const handleButtonClick = (categoryId, categoryName) => {
+    setActiveButton(categoryName);
+    setSelectedCategoryId(categoryId); // Set the selected category ID
+
+    // Additional logic for handling button click goes here
   };
 
-  const addKeyword = () => {
-    if (keywordInput.trim() !== '') {
-      setData({
-        ...data,
-        keywords: [...data.keywords, keywordInput],
-      });
-      setKeywordInput('');
+
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+        // Call the API to upload the image
+        uploadImage(file);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
-  const removeKeyword = index => {
-    const updatedKeywords = [...data.keywords];
-    updatedKeywords.splice(index, 1);
-    setData({ ...data, keywords: updatedKeywords });
+  const uploadImage = async (file) => {
+    try {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        console.error('Token not found in localStorage');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
+        }
+      };
+
+      const response = await axios.post(`${baseurl}/api/restaurant/uploadItemImage`, formData, config);
+
+      console.log('Image uploaded successfully:', response.data);
+      setItemimg(response.data.url)
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
   };
+
+
+
+
+  const handleItemNameChange = (e) => {
+    const itemNameValue = e.target.value;
+    console.log('Item Name:', itemNameValue);
+    setItemName(itemNameValue);
+  };
+
+  const handlePriceChange = (e) => {
+    const priceValue = e.target.value;
+    console.log('Price:', priceValue);
+    setPrice(priceValue);
+  };
+
+  const handleAddNewAddon = () => {
+    // Create a new addon object with empty name and price
+    const newAddon = { name: '', price: '' };
+    // Add the new addon to the addons array
+    setAddons([...addons, newAddon]);
+  };
+
+  const handleAddonNameChange = (index, event) => {
+    const newAddons = [...addons];
+    newAddons[index].name = event.target.value;
+    setAddons(newAddons);
+  };
+
+  const handleAddonPriceChange = (index, event) => {
+    const newAddons = [...addons];
+    newAddons[index].price = event.target.value;
+    setAddons(newAddons);
+  };
+
+
+
+
+  const handleAddItem = async () => {
+    try {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        console.error('Token not found in localStorage');
+        return;
+      }
+
+      const newItem = {
+        name: itemName,
+        price: price,
+        category: selectedCategoryId,
+        addOns: addons,
+        image : itemimg,
+      };
+      console.log(newItem)
+
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      };
+
+      const response = await axios.post(`${baseurl}/api/restaurant/addItem`, newItem, config);
+
+      console.log('Item added successfully:', response.data);
+
+      // Clear the form fields after successful addition
+      setItemName('');
+      setPrice('');
+
+
+      toast.success(response.data.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    } catch (error) {
+      console.error('Error adding item:', error);
+      toast.error(error.response.data.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
+  };
+
   return (
     <div>
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme='light'
+      />
+
       <Container fluid className='  h-100'>
         <Row>
           <Col
@@ -81,83 +259,30 @@ export const index = () => {
                 </div>
                 <div>
                   <Row className='my-4'>
-                    <Col lg={2} md={3} xs={6}>
-                      <button
-                        className='border-0 shadow w-100'
-                        style={{
-                          padding: '10px 30px',
-                          borderRadius: '8px',
-                          color:
-                            activeButton === 'STARTER' ? '#FFFFFF' : '#717171',
-                          fontSize: '14px',
-                          fontWeight: '500',
-                          backgroundColor:
-                            activeButton === 'STARTER' ? '#00BF63' : '#FFFFFF',
-                        }}
-                        onClick={() => handleButtonClick('STARTER')}
-                      >
-                        STARTER
-                      </button>
-                    </Col>
-                    <Col lg={2} md={3} xs={6}>
-                      <button
-                        className='border-0 shadow w-100'
-                        style={{
-                          padding: '10px 30px',
-                          borderRadius: '8px',
-                          color:
-                            activeButton === 'MAIN' ? '#FFFFFF' : '#717171',
-                          fontSize: '14px',
-                          fontWeight: '500',
-                          backgroundColor:
-                            activeButton === 'MAIN' ? '#00BF63' : '#FFFFFF',
-                        }}
-                        onClick={() => handleButtonClick('MAIN')}
-                      >
-                        MAIN
-                      </button>
-                    </Col>
-                    <Col lg={2} md={3} xs={6}>
-                      <button
-                        className='border-0 shadow w-100'
-                        style={{
-                          padding: '10px 30px',
-                          borderRadius: '8px',
-                          color:
-                            activeButton === 'DESSERT' ? '#FFFFFF' : '#717171',
-                          fontSize: '14px',
-                          fontWeight: '500',
-                          backgroundColor:
-                            activeButton === 'DESSERT' ? '#00BF63' : '#FFFFFF',
-                        }}
-                        onClick={() => handleButtonClick('DESSERT')}
-                      >
-                        DESSERT
-                      </button>
-                    </Col>
-                    <Col lg={2} md={3} xs={6}>
-                      <button
-                        className='border-0 shadow w-100'
-                        style={{
-                          padding: '10px 30px',
-                          borderRadius: '8px',
-                          color:
-                            activeButton === 'DRINK' ? '#FFFFFF' : '#717171',
-                          fontSize: '14px',
-                          fontWeight: '500',
-                          backgroundColor:
-                            activeButton === 'DRINK' ? '#00BF63' : '#FFFFFF',
-                        }}
-                        onClick={() => handleButtonClick('DRINK')}
-                      >
-                        DRINK
-                      </button>
-                    </Col>
+                  {categories.map(category => (
+          <div className="col-lg-2 col-md-3 col-xs-6" key={category.id}>
+            <button
+              className='border-0 shadow w-100 mt-3'
+              style={{
+                padding: '10px 30px',
+                borderRadius: '8px',
+                color: activeButton === category.name ? '#FFFFFF' : '#717171',
+                fontSize: '14px',
+                fontWeight: '500',
+                backgroundColor: activeButton === category.name ? '#00BF63' : '#FFFFFF',
+              }}
+              onClick={() => handleButtonClick(category._id, category.name)}
+            >
+              {category.name.toUpperCase()}
+            </button>
+          </div>
+        ))}
+
 
                     <Col lg={4} md={3} xs={6}>
                       <Link to='/AddNewCategory'>
                         <button
-                          className=' shadow w-100'
+                          className=' shadow w-100 mt-3'
                           style={{
                             padding: '10px 30px',
                             borderRadius: '8px',
@@ -204,18 +329,51 @@ export const index = () => {
                           color: '#B5B5B5',
                         }}
                       >
-                        <img src='/gallery-add.svg' alt='' />
+                        <input
+                          type='file'
+                          accept='image/*'
+                          onChange={handleImageChange}
+                          style={{ display: 'none' }}
+                          ref={(input) => (fileInputRef = input)}
+                        />
+                        {selectedImage ? (
 
-                        <p
-                          className=' ms-2 pt-1'
-                          style={{
-                            color: '#4C535F',
-                            fontSize: '12px',
-                            fontWeight: '500',
-                          }}
-                        >
-                          Upload photo
-                        </p>
+                          <>
+                            <img
+                              src={selectedImage}
+                              alt='Selected'
+                              className='my-5'
+                              onClick={() => fileInputRef.click()}
+                              style={{ cursor: 'pointer', width: '300px', height: '300px', objectFit: 'contain' }}
+                            />
+
+                          </>
+                        ) : (
+                          <>
+                            <img
+                              src='/gallery-add.svg'
+                              alt='Upload QR'
+                              className='my-5'
+                              onClick={() => fileInputRef.click()}
+                              style={{ cursor: 'pointer' }}
+                            />
+                            <p
+                              className=' ms-2 pt-1'
+                              style={{
+                                color: '#4C535F',
+                                fontSize: '12px',
+                                fontWeight: '500',
+                              }}
+                            >
+                              Upload photo
+                            </p>
+
+                          </>
+
+                        )}
+
+
+
                       </div>
                     </div>
                   </Col>
@@ -242,6 +400,8 @@ export const index = () => {
                       }}
                       type='text'
                       placeholder='Please enter your item name'
+                      value={itemName}
+                      onChange={handleItemNameChange}
                     />
                   </Col>
                   <Col lg={4}>
@@ -256,7 +416,7 @@ export const index = () => {
                       Price
                     </p>
                     <input
-                      type='text'
+                      type='number'
                       className='w-100 border-0 p-3'
                       style={{
                         backgroundColor: '#FFFFFF',
@@ -267,6 +427,8 @@ export const index = () => {
                         color: '#B5B5B5',
                       }}
                       placeholder='Please enter your Price'
+                      value={price}
+                      onChange={handlePriceChange}
                     />
                   </Col>
                 </Row>
@@ -338,62 +500,50 @@ export const index = () => {
                       Choose items to add
                     </p>
 
-                    <div className='d-flex flex-column justify-content-start align-items-start w-100 '>
-                      <div
-                        style={{
-                          boxShadow:
-                            '1px 2px 11.100000381469727px 0px #0000001A',
-                          borderRadius: '8px',
-                          backgroundColor: '#FFFFFF',
-                        }}
-                      >
-                        <input
-                          className='d-flex  p-1 w-100 justify-content-start align-items-start border-0 '
-                          style={{
-                            backgroundColor: '#F9F9F9',
-                            padding: '8px',
-                            borderRadius: '2px',
-                            marginBottom: '4px',
-                          }}
-                          placeholder='Add more Keywords |'
-                          value={keywordInput}
-                          onChange={e => setKeywordInput(e.target.value)}
-                          onKeyPress={e => {
-                            if (e.key === 'Enter') {
-                              addKeyword();
-                            }
-                          }}
-                          required
-                        />
-                      </div>
-
-                      <div className='d-flex'>
-                        {data.keywords.map((keyword, index) => (
-                          <div
-                            key={index}
-                            className='rounded-5 p-2 me-2 text-center mt-2 d-flex text-nowrap '
-                            style={{
-                              backgroundColor: '#F9F9F9',
-                              color: '#A6A6A6',
-                              fontsize: '14px',
-                              fontWeight: '400',
-                              cursor: 'pointer',
-                              padding: '2px',
-                              borderRadius: '2px',
-                              width: 'auto',
-                            }}
-                          >
-                            {keyword}
-                            <img
-                              role='button'
-                              src='/Cross.svg'
-                              alt='Remove'
-                              className='ms-3 '
-                              onClick={() => removeKeyword(index)}
-                            />
-                          </div>
-                        ))}
-                      </div>
+                    {addons.map((addon, index) => (
+        <div className='w-100 mt-3' key={index}>
+          <input
+            type="text"
+            className=' border-0 p-3'
+            placeholder='Addon name'
+            value={addon.name}
+            style={{
+              backgroundColor: '#FFFFFF',
+              boxShadow: '1px 2px 11.100000381469727px 0px #0000001A',
+              fontSize: '14px',
+              borderRadius: '8px',
+              fontWeight: '500',
+              color: '#B5B5B5',
+            }}
+            onChange={(event) => handleAddonNameChange(index, event)}
+          />
+          <input
+            type="text"
+            placeholder='Price'
+            className=' border-0 p-3 ms-2'
+            value={addon.price}
+            onChange={(event) => handleAddonPriceChange(index, event)}
+            style={{
+              backgroundColor: '#FFFFFF',
+              boxShadow: '1px 2px 11.100000381469727px 0px #0000001A',
+              fontSize: '14px',
+              borderRadius: '8px',
+              fontWeight: '500',
+              color: '#B5B5B5',
+            }}
+          />
+        </div>
+      ))}
+                    <div>
+                      <button type="button" className='mt-2 border-0' 
+                      style={{
+                        color: '#FFFFFF',
+                        backgroundColor: '#00BF63',
+                        padding: '11px 20px 11px 20px',
+                        borderRadius: '8px',
+                        fontSize: '16px',
+                        fontWeight: '500',
+                      }} onClick={handleAddNewAddon}> Add new</button>
                     </div>
                   </Col>
                 </Row>
@@ -426,7 +576,8 @@ export const index = () => {
                         fontSize: '16px',
                         fontWeight: '500',
                       }}
-                    >
+                      onClick={handleAddItem}
+                        >
                       Add Item
                     </button>
                   </Col>

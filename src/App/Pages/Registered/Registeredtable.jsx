@@ -1,65 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import './table.css';
+import { baseUrl } from '../../Components/constants.jsx';
 const RegisteredTable = () => {
-  const data = [
-    {
-      No: '01.',
-      Image:
-        'https://s3-alpha-sig.figma.com/img/c542/dd3c/2aee723b27e41f115b0ca1821bda1c5c?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cKewdBXJGmF1SVA24qZdcSPvXm9e9O-Rq959g0DDU6sagaaAwZBXetP1X1QRplZ9J6l~ra~KbiN2oLYZT2uziGXwPNDqOEp~c5fUEmoYaLVz8Zt2uoexQicN-oWPUKRsIFfvwB--XIIN43Io-2yTw-DqM0U~GyPbT12rgXboIQ7MoQlpSL0bGorpbAPjIF35ilynrH7vsw3SvyUAbfWZl8RkRw2qaGp1zs4QoPArY8J7ys455S5Mnqjmti45IGnLepUOO49-egcSXO4WdRWkglrQrMR02tM~OCZ5JKNFrm8rcKbPBlzNj8nKhi53Y0st-MOrdSyH2bmn1~TQEam9kA__',
-      Name: 'Thomas Shelby',
-      Email: 'johnsondoe@nomail.com',
-    },
-    {
-      No: '01.',
-      Image:
-        'https://s3-alpha-sig.figma.com/img/c542/dd3c/2aee723b27e41f115b0ca1821bda1c5c?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cKewdBXJGmF1SVA24qZdcSPvXm9e9O-Rq959g0DDU6sagaaAwZBXetP1X1QRplZ9J6l~ra~KbiN2oLYZT2uziGXwPNDqOEp~c5fUEmoYaLVz8Zt2uoexQicN-oWPUKRsIFfvwB--XIIN43Io-2yTw-DqM0U~GyPbT12rgXboIQ7MoQlpSL0bGorpbAPjIF35ilynrH7vsw3SvyUAbfWZl8RkRw2qaGp1zs4QoPArY8J7ys455S5Mnqjmti45IGnLepUOO49-egcSXO4WdRWkglrQrMR02tM~OCZ5JKNFrm8rcKbPBlzNj8nKhi53Y0st-MOrdSyH2bmn1~TQEam9kA__',
-      Name: 'Thomas Shelby',
-      Email: 'johnsondoe@nomail.com',
-    },
-    {
-      No: '01.',
-      Image:
-        'https://s3-alpha-sig.figma.com/img/c542/dd3c/2aee723b27e41f115b0ca1821bda1c5c?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cKewdBXJGmF1SVA24qZdcSPvXm9e9O-Rq959g0DDU6sagaaAwZBXetP1X1QRplZ9J6l~ra~KbiN2oLYZT2uziGXwPNDqOEp~c5fUEmoYaLVz8Zt2uoexQicN-oWPUKRsIFfvwB--XIIN43Io-2yTw-DqM0U~GyPbT12rgXboIQ7MoQlpSL0bGorpbAPjIF35ilynrH7vsw3SvyUAbfWZl8RkRw2qaGp1zs4QoPArY8J7ys455S5Mnqjmti45IGnLepUOO49-egcSXO4WdRWkglrQrMR02tM~OCZ5JKNFrm8rcKbPBlzNj8nKhi53Y0st-MOrdSyH2bmn1~TQEam9kA__',
-      Name: 'Thomas Shelby',
-      Email: 'johnsondoe@nomail.com',
-    },
-    {
-      No: '01.',
-      Image:
-        'https://s3-alpha-sig.figma.com/img/c542/dd3c/2aee723b27e41f115b0ca1821bda1c5c?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cKewdBXJGmF1SVA24qZdcSPvXm9e9O-Rq959g0DDU6sagaaAwZBXetP1X1QRplZ9J6l~ra~KbiN2oLYZT2uziGXwPNDqOEp~c5fUEmoYaLVz8Zt2uoexQicN-oWPUKRsIFfvwB--XIIN43Io-2yTw-DqM0U~GyPbT12rgXboIQ7MoQlpSL0bGorpbAPjIF35ilynrH7vsw3SvyUAbfWZl8RkRw2qaGp1zs4QoPArY8J7ys455S5Mnqjmti45IGnLepUOO49-egcSXO4WdRWkglrQrMR02tM~OCZ5JKNFrm8rcKbPBlzNj8nKhi53Y0st-MOrdSyH2bmn1~TQEam9kA__',
-      Name: 'Thomas Shelby',
-      Email: 'johnsondoe@nomail.com',
-    },
-    {
-      No: '01.',
-      Image:
-        'https://s3-alpha-sig.figma.com/img/c542/dd3c/2aee723b27e41f115b0ca1821bda1c5c?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cKewdBXJGmF1SVA24qZdcSPvXm9e9O-Rq959g0DDU6sagaaAwZBXetP1X1QRplZ9J6l~ra~KbiN2oLYZT2uziGXwPNDqOEp~c5fUEmoYaLVz8Zt2uoexQicN-oWPUKRsIFfvwB--XIIN43Io-2yTw-DqM0U~GyPbT12rgXboIQ7MoQlpSL0bGorpbAPjIF35ilynrH7vsw3SvyUAbfWZl8RkRw2qaGp1zs4QoPArY8J7ys455S5Mnqjmti45IGnLepUOO49-egcSXO4WdRWkglrQrMR02tM~OCZ5JKNFrm8rcKbPBlzNj8nKhi53Y0st-MOrdSyH2bmn1~TQEam9kA__',
-      Name: 'Thomas Shelby',
-      Email: 'johnsondoe@nomail.com',
-    },
-    {
-      No: '01.',
-      Image:
-        'https://s3-alpha-sig.figma.com/img/c542/dd3c/2aee723b27e41f115b0ca1821bda1c5c?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cKewdBXJGmF1SVA24qZdcSPvXm9e9O-Rq959g0DDU6sagaaAwZBXetP1X1QRplZ9J6l~ra~KbiN2oLYZT2uziGXwPNDqOEp~c5fUEmoYaLVz8Zt2uoexQicN-oWPUKRsIFfvwB--XIIN43Io-2yTw-DqM0U~GyPbT12rgXboIQ7MoQlpSL0bGorpbAPjIF35ilynrH7vsw3SvyUAbfWZl8RkRw2qaGp1zs4QoPArY8J7ys455S5Mnqjmti45IGnLepUOO49-egcSXO4WdRWkglrQrMR02tM~OCZ5JKNFrm8rcKbPBlzNj8nKhi53Y0st-MOrdSyH2bmn1~TQEam9kA__',
-      Name: 'Thomas Shelby',
-      Email: 'johnsondoe@nomail.com',
-    },
-    {
-      No: '01.',
-      Image:
-        'https://s3-alpha-sig.figma.com/img/c542/dd3c/2aee723b27e41f115b0ca1821bda1c5c?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cKewdBXJGmF1SVA24qZdcSPvXm9e9O-Rq959g0DDU6sagaaAwZBXetP1X1QRplZ9J6l~ra~KbiN2oLYZT2uziGXwPNDqOEp~c5fUEmoYaLVz8Zt2uoexQicN-oWPUKRsIFfvwB--XIIN43Io-2yTw-DqM0U~GyPbT12rgXboIQ7MoQlpSL0bGorpbAPjIF35ilynrH7vsw3SvyUAbfWZl8RkRw2qaGp1zs4QoPArY8J7ys455S5Mnqjmti45IGnLepUOO49-egcSXO4WdRWkglrQrMR02tM~OCZ5JKNFrm8rcKbPBlzNj8nKhi53Y0st-MOrdSyH2bmn1~TQEam9kA__',
-      Name: 'Thomas Shelby',
-      Email: 'johnsondoe@nomail.com',
-    },
-    {
-      No: '01.',
-      Image:
-        'https://s3-alpha-sig.figma.com/img/c542/dd3c/2aee723b27e41f115b0ca1821bda1c5c?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cKewdBXJGmF1SVA24qZdcSPvXm9e9O-Rq959g0DDU6sagaaAwZBXetP1X1QRplZ9J6l~ra~KbiN2oLYZT2uziGXwPNDqOEp~c5fUEmoYaLVz8Zt2uoexQicN-oWPUKRsIFfvwB--XIIN43Io-2yTw-DqM0U~GyPbT12rgXboIQ7MoQlpSL0bGorpbAPjIF35ilynrH7vsw3SvyUAbfWZl8RkRw2qaGp1zs4QoPArY8J7ys455S5Mnqjmti45IGnLepUOO49-egcSXO4WdRWkglrQrMR02tM~OCZ5JKNFrm8rcKbPBlzNj8nKhi53Y0st-MOrdSyH2bmn1~TQEam9kA__',
-      Name: 'Thomas Shelby',
-      Email: 'johnsondoe@nomail.com',
-    },
-  ];
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Token not found');
+        }
+
+        const response = await fetch(
+          `${baseUrl}/api/restaurant/getCustomers`, // Replace 'your-get-api-endpoint' with your actual API endpoint
+          {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (!response.ok) {
+          const errorMessage = await response.text();
+          throw new Error(`Network response was not ok: ${errorMessage}`);
+        }
+
+        const jsonData = await response.json();
+        setData(jsonData.customers); // Assuming your API response is an array of objects similar to the 'data' array
+        console.log(jsonData.customers);
+     
+      } catch (error) {
+        console.error('API Error:', error.message);
+        setError('Failed to fetch data. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array to run the effect only once on component mount
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    console.log(error);
+    return <div>Error: {error}</div>;
+  }
+
+  if (data.length === 0) {
+    return <div>No data found.</div>;
+  }
 
   return (
     <div className='px-5'>
@@ -67,16 +65,16 @@ const RegisteredTable = () => {
         <thead>
           <tr>
             <th className='tablehead'>No</th>
-            <th className='tablehead text-nowrap '>Profile Image</th>
+            {/* <th className='tablehead text-nowrap '>Profile Image</th> */}
             <th className='tablehead'>Name</th>
             <th className='tablehead'>Email</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((val, key) => (
-            <tr key={key}>
-              <td className='tabledata'>{val.No}</td>
-              <td className='tabledata'>
+          {data.map((val, index) => (
+            <tr key={index}>
+              <td className='tabledata'>{index + 1}</td>
+              {/* <td className='tabledata'>
                 <div
                   style={{
                     width: '40px',
@@ -95,9 +93,9 @@ const RegisteredTable = () => {
                     }}
                   />
                 </div>
-              </td>
-              <td className='tabledata'>{val.Name}</td>
-              <td className='tabledata'>{val.Email}</td>
+              </td> */}
+              <td className='tabledata'>{val.name}</td>
+              <td className='tabledata'>{val.email}</td>
             </tr>
           ))}
         </tbody>

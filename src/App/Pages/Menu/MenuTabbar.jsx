@@ -60,6 +60,32 @@ const MenuTabbar = () => {
     console.log('Active Tab:', category); // Log the name of the clicked category
   };
 
+
+
+
+
+  const handleDelete = async (itemId) => {
+    try {
+      const response = await axios.delete(`${baseUrl}/api/restaurant/deleteItem/${itemId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (response.data.message === 'Item deleted successfully') {
+        // Refresh menu data after successful deletion
+        fetchMenuData();
+        console.log('Item deleted successfully');
+      } else {
+        throw new Error('Failed to delete item');
+      }
+    } catch (error) {
+      console.error(error);
+      setError(error.message);
+    }
+  };
+
+  console.log(handleDelete)
   return (
     <>
     <div>
@@ -153,7 +179,8 @@ const MenuTabbar = () => {
             $ {item.price} 
           </p>
           <span className='me-2 text-danger'>
-          <u> Delete</u>
+          <button onClick={() => handleDelete(item._id)}> Delete</button>
+
           </span>
           </div>
          

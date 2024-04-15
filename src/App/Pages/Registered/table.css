@@ -2,7 +2,7 @@
   font-size: 15px;
   font-weight: 600;
   color: #444444;
-  line-height: 18px;
+  /* line-height: 1px; */
   border: 0px, 0px, 0.5px, 0px;
   border-bottom: 0.5px solid #CCCCCC;
   border-radius: 15px;
@@ -13,9 +13,9 @@
   font-size: 14px;
   font-weight: 400;
   color: #444444;
-  line-height: 18px;
-  width: 1003px;
-  height: 59px;
+  /* line-height: 18px; */
+  /* width: 1003px; */
+  /* height: 59px; */
   border: 0px, 0px, 0.5px, 0px;
   border-bottom: 0.5px solid #CCCCCC;
   border-radius: 15px;

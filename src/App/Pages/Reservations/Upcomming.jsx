@@ -10,12 +10,13 @@ export const Upcoming = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
+        console.log(token)
         if (!token) {
           throw new Error('Token not found');
         }
 
         const response = await fetch(
-          `${baseUrl}/api/customer/getReservations?status=upcoming`,
+          `${baseUrl}/api/restaurant//getReservations?status=upcoming`,
           {
             method: 'GET',
             headers: {
@@ -31,7 +32,7 @@ export const Upcoming = () => {
         }
 
         const jsonData = await response.json();
-        setData(jsonData);
+        setData(jsonData.data);
       } catch (error) {
         console.error('API Error:', error.message); // Log the error to the console
         setError('Failed to fetch data. Please try again later.'); // Set the error state
@@ -52,7 +53,7 @@ export const Upcoming = () => {
     return <div>Error: {error}</div>; // Display the error in the UI
   }
 
-  if (data.length === 0) {
+  if (!Array.isArray(data) || data.length === 0) {
     return <div>No upcoming reservations found.</div>;
   }
 

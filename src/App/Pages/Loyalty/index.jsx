@@ -87,7 +87,7 @@ export const index = () =>
                             Name='Cheese Burger'
                           />
                         </Col>
-                        <Col lg={ 3 } md={ 3 } xl={ 3 }>
+                        {/* <Col lg={ 3 } md={ 3 } xl={ 3 }>
                           <LoylityCard
                             Image='/White Sauce Pasta.png'
                             price='3.88'
@@ -149,7 +149,7 @@ export const index = () =>
                             price='3.88'
                             Name='Thai  Soup'
                           />
-                        </Col>
+                        </Col> */}
                       </Row>
                     </div>
                   </div>
@@ -159,6 +159,7 @@ export const index = () =>
           </Col>
         </Row>
       </Container>
+      
     </div>
   );
 };

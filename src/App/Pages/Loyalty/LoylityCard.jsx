@@ -48,7 +48,8 @@ const LoylityCard = () => {
   return (
     <div>
       {cardData.map((card, index) => (
-        <div key={index} className='px-4'>
+           <Col   key={index}>
+        <div className='px-4'>
           <div
             className='p-3'
             style={{ boxShadow: '1px 2px 11.1px 0px #0000001A' }}
@@ -126,6 +127,7 @@ const LoylityCard = () => {
             </Row>
           </div>
         </div>
+        </Col>
       ))}
     </div>
   );

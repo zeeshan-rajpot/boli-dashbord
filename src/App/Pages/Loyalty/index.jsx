@@ -4,27 +4,28 @@ import Navbar from '../../Components/Navbar.jsx';
 import SideBar from '../../Components/Sidebar.jsx';
 import LoylityCard from './LoylityCard.jsx';
 import { Link } from 'react-router-dom';
-export const index = () => {
+export const index = () =>
+{
   return (
     <div>
       <Container fluid className='  h-100'>
         <Row>
           <Col
-            xs={2}
-            md={2}
+            xs={ 2 }
+            md={ 2 }
             className=' text-center p-0 shadow '
-            style={{
+            style={ {
               backgroundColor: '#FFFFFF',
               height: '100vh',
-            }}
+            } }
           >
             <SideBar activetabe='Loyalty' />
           </Col>
           <Col
-            md={10}
-            xs={10}
+            md={ 10 }
+            xs={ 10 }
             className='custom-scrollbar'
-            style={{ height: '100vh', overflowY: 'auto' }}
+            style={ { height: '100vh', overflowY: 'auto' } }
           >
             <Row>
               <Navbar />
@@ -38,7 +39,7 @@ export const index = () => {
                         <div>
                           <p
                             className='textColor'
-                            style={{ fontSize: '22px', fontWeight: '700' }}
+                            style={ { fontSize: '22px', fontWeight: '700' } }
                           >
                             Loyalty Card
                           </p>
@@ -46,11 +47,11 @@ export const index = () => {
                         <div>
                           <p
                             className='my-1'
-                            style={{
+                            style={ {
                               color: '#717171',
                               fontWeight: '400',
                               fontSize: '20px',
-                            }}
+                            } }
                           >
                             Every dollar user spends on eligible purchases, they
                             will receive 100 points.
@@ -61,7 +62,7 @@ export const index = () => {
                         <Link to='/AddLoylity'>
                           <button
                             className='border-0 bg-transparent '
-                            style={{
+                            style={ {
                               color: '#00BF63',
                               boxShadow:
                                 '2px 4px 17.600000381469727px 0px #0000002B',
@@ -69,7 +70,7 @@ export const index = () => {
                               fontSize: '14px',
                               fontWeight: '500',
                               borderRadius: '8px',
-                            }}
+                            } }
                           >
                             Add Item
                           </button>
@@ -79,70 +80,70 @@ export const index = () => {
 
                     <div className='my-2'>
                       <Row className='no-gutters px-5'>
-                        <Col lg={3} md={3} xl={3}>
+                        <Col lg={ 3 } md={ 3 } xl={ 3 }>
                           <LoylityCard
                             Image='/Cheese Burger .png'
                             points='300'
                             Name='Cheese Burger'
                           />
                         </Col>
-                        <Col lg={3} md={3} xl={3}>
+                        <Col lg={ 3 } md={ 3 } xl={ 3 }>
                           <LoylityCard
                             Image='/White Sauce Pasta.png'
                             price='3.88'
                             Name='Toffe’s Cake'
                           />
                         </Col>
-                        <Col lg={3} md={3} xl={3}>
+                        <Col lg={ 3 } md={ 3 } xl={ 3 }>
                           <LoylityCard
                             Image='/Dancake.png'
                             price='3.88'
                             Name='Dancake'
                           />
                         </Col>
-                        <Col lg={3} md={3} xl={3}>
+                        <Col lg={ 3 } md={ 3 } xl={ 3 }>
                           <LoylityCard
                             Image='/Crispy Sandwitch .png'
                             price='3.88'
                             Name='Crispy Sandwitch'
                           />
                         </Col>
-                        <Col lg={3} md={3} xl={3}>
+                        <Col lg={ 3 } md={ 3 } xl={ 3 }>
                           <LoylityCard
                             Image='/Dancake.png'
                             price='3.88'
                             Name='Thai  Soup'
                           />
                         </Col>
-                        <Col lg={3} md={3} xl={3}>
+                        <Col lg={ 3 } md={ 3 } xl={ 3 }>
                           <LoylityCard
                             Image='/Cheese Burger .png'
                             points='300'
                             Name='Cheese Burger'
                           />
                         </Col>
-                        <Col lg={3} md={3} xl={3}>
+                        <Col lg={ 3 } md={ 3 } xl={ 3 }>
                           <LoylityCard
                             Image='/White Sauce Pasta.png'
                             price='3.88'
                             Name='Toffe’s Cake'
                           />
                         </Col>
-                        <Col lg={3} md={3} xl={3}>
+                        <Col lg={ 3 } md={ 3 } xl={ 3 }>
                           <LoylityCard
                             Image='/Dancake.png'
                             price='3.88'
                             Name='Dancake'
                           />
                         </Col>
-                        <Col lg={3} md={3} xl={3}>
+                        <Col lg={ 3 } md={ 3 } xl={ 3 }>
                           <LoylityCard
                             Image='/Crispy Sandwitch .png'
                             price='3.88'
                             Name='Crispy Sandwitch'
                           />
                         </Col>
-                        <Col lg={3} md={3} xl={3}>
+                        <Col lg={ 3 } md={ 3 } xl={ 3 }>
                           <LoylityCard
                             Image='/Dancake.png'
                             price='3.88'
